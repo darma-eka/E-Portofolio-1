@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Serif+Display:ital@0;1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Serif+Display:ital@0;1&display=swap"
         rel="stylesheet">
 
     <style>
@@ -446,68 +446,7 @@
             }
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 8rem;
-            right: 4rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: opacity 0.3s ease;
-        }
-
-        .scroll-indicator:hover {
-            opacity: 0.8;
-        }
-
-        .scroll-indicator .mono-text {
-            writing-mode: vertical-rl;
-            font-size: 0.7rem;
-            transition: color 0.3s ease;
-        }
-
-        .scroll-indicator:hover .mono-text {
-            color: var(--accent-color);
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 60px;
-            background-color: rgba(245, 240, 232, 0.3);
-            position: relative;
-            overflow: hidden;
-            transition: background-color 0.3s ease;
-        }
-
-        .scroll-indicator:hover .scroll-line {
-            background-color: rgba(255, 184, 0, 0.3);
-        }
-
-        .scroll-line::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background-color: var(--accent-color);
-            animation: bounce 2s infinite ease-in-out;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(-100%);
-            }
-
-            50% {
-                transform: translateY(200%);
-            }
-        }
+        
 
         /* 2. ABOUT SECTION */
         .about-container {
@@ -1703,7 +1642,7 @@
             top: 2.5rem;
             width: 14px;
             height: 14px;
-            background-color: var(--bg-color);
+            background-color: var(--accent-color);
             border: 2px solid var(--accent-color);
             border-radius: 50%;
             z-index: 2;
@@ -2410,6 +2349,70 @@
             border: 1px solid rgba(255,255,255,0.08);
         }
 
+        /* Hero Layout Styles */
+        .hero-content-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 2;
+            gap: 4rem;
+        }
+
+        .hero-left-content {
+            flex: 1;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .hero-right-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-profile-card {
+            position: relative;
+            max-width: 380px;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 184, 0, 0.25);
+            background-color: rgba(11, 30, 54, 0.5);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .hero-profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(255, 184, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 184, 0, 0.6);
+        }
+
+        .hero-profile-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-profile-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .hero-profile-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 30, 54, 0.4) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
         @media (max-width: 1024px) {
             .kompetensi-grid { grid-template-columns: repeat(2, 1fr); }
             .galeri-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2417,6 +2420,14 @@
         }
 
         @media (max-width: 768px) {
+            .hero-content-wrapper {
+                flex-direction: column-reverse;
+                gap: 3rem;
+            }
+            .hero-left-content {
+                text-align: center;
+                align-items: center;
+            }
             .model-guru-section { padding: 4rem 1.5rem; }
             .kompetensi-grid { grid-template-columns: 1fr; }
             .misi-container { padding: 2rem; }
@@ -2453,7 +2464,7 @@
                     <a href="#asal-daerah">Asal & Keunikan Daerah</a>
                     <a href="#inspirasi">Inspirasi & Visi Menjadi Guru</a>
                     <a href="#motivasi">Motivasi</a>
-                    <a href="#experience">Pengalaman</a>
+                    <a href="#experience">Riwayat Hidup</a>
                 </div>
             </div>
             <div class="nav-item">
@@ -2494,7 +2505,7 @@
                 <a href="#asal-daerah" class="mobile-link">Asal & Keunikan Daerah</a>
                 <a href="#inspirasi" class="mobile-link">Inspirasi & Visi Menjadi Guru</a>
                 <a href="#motivasi" class="mobile-link">Motivasi</a>
-                <a href="#experience" class="mobile-link">PENGALAMAN</a>
+                <a href="#experience" class="mobile-link">RIWAYAT HIDUP</a>
             </div>
         </div>
         <div class="mobile-item">
@@ -2523,10 +2534,25 @@
     <main>
         <!-- Hero Section -->
         <section id="hero" class="hero">
-            <h1 class="hero-title fade-up delay-1">
-                <span>Eka Sri</span>
-                <span class="offset">Darma</span>
-            </h1>
+            <div class="hero-content-wrapper">
+                <div class="hero-left-content fade-up delay-1">
+                    <p style="font-family: var(--font-mono, monospace); font-size: 0.9rem; color: var(--accent-color); opacity: 0.8; margin-bottom: 0.5rem; letter-spacing: 2px;">PPG PRAJABATAN 2025-2026</p>
+                    <h1 style="font-size: clamp(3rem, 8vw, 4.5rem); line-height: 1.1; font-weight: 700; margin: 0; font-family: 'Dancing Script', cursive;">
+                        <span style="color: #F5F0E8; display: block;">Eka Sri</span>
+                        <span style="color: var(--accent-color); display: block;">Darma</span>
+                    </h1>
+                    <p style="font-family: var(--font-mono, monospace); font-size: 0.9rem; color: var(--accent-color); opacity: 0.8; margin-top: 0.5rem; letter-spacing: 2px;">NIM 20250843912</p>
+                    <p style="margin-top: 1.5rem; font-size: 1rem; line-height: 1.6; color: var(--text-color); opacity: 0.9;">
+                        Calon pendidik vokasional bidang Teknik Pemesinan yang berdedikasi untuk menciptakan pembelajaran inovatif, berpusat pada peserta didik, dan relevan dengan standar industri manufaktur.
+                    </p>
+                </div>
+
+                <div class="hero-right-content fade-up delay-2">
+                    <div class="hero-profile-card">
+                        <img src="Foto Profil/Foto Profil.png" alt="Foto Profil">
+                    </div>
+                </div>
+            </div>
 
             <div class="marquee-wrapper fade-up delay-3">
                 <div class="marquee">
@@ -2545,18 +2571,14 @@
                 </div>
             </div>
 
-            <a href="#about" class="scroll-indicator fade-up delay-3">
-                <span class="mono-text">SCROLL</span>
-                <div class="scroll-line"></div>
-            </a>
+            
         </section>
 
         <!-- About Section -->
         <section id="about" class="about">
             <div class="about-container">
                 <div class="about-left fade-up">
-                    <h2 class="about-quote">"Desain bukan hanya apa yang terlihat, tetapi <span>bagaimana ia
-                            bekerja.</span>"</h2>
+                    <h2 class="about-quote">"Teknik mengajarkan saya presisi; pendidikan mengajarkan saya empati <span>keduanya saya bawa ke setiap kelas yang saya masuki.</span>"</h2>
                 </div>
                 <div class="about-right fade-up delay-1">
                     <!-- Paragraph Slider -->
@@ -2730,32 +2752,36 @@
 
         <!-- Experience Section -->
         <section id="experience" class="experience">
-            <h2 class="section-header fade-up">Perjalanan</h2>
+            <h2 class="section-header fade-up">Riwayat Hidup</h2>
             <div class="timeline">
                 <div class="timeline-progress"></div>
 
                 <div class="timeline-item fade-up">
-                    <span class="timeline-date mono-text">2023 – Sekarang</span>
+                    <span class="timeline-date mono-text">2025 – Sekarang</span>
+                    <h3 class="timeline-company">Universitas Sarjanawiyata Tamansiswa</h3>
+                    <p class="timeline-role">PPG Prajabatan</p>
+                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none; text-align: justify;">Mengikuti Program Pendidikan Profesi Guru (PPG) Prajabatan di Universitas Sarjanawiyata Tamansiswa Yogyakarta sebagai upaya memperoleh sertifikat pendidik profesional. Selama program, mengembangkan empat kompetensi utama guru yaitu pedagogik, profesional, kepribadian, dan sosial melalui perkuliahan intensif, seminar pendidikan, microteaching, serta Praktik Pengalaman Lapangan (PPL) di sekolah mitra yaitu SMK Negeri 2 Depok Sleman. Mendalami implementasi Kurikulum Merdeka, penyusunan modul ajar, Alur Tujuan Pembelajaran (ATP), serta asesmen berbasis kompetensi yang berpusat pada peserta didik.</p>
+                </div>
+
+                <div class="timeline-item fade-up">
+                    <span class="timeline-date mono-text">2019 – 2020</span>
+                    <h3 class="timeline-company">Engineering Research Club</h3>
+                    <p class="timeline-role">Organisasi</p>
+                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none; text-align: justify;">Aktif sebagai anggota Engineering Research Club (EneRC), sebuah Badan Semi Otonom Fakultas Teknik Universitas Negeri Semarang yang bergerak di bidang keilmiahan, penelitian, dan penalaran. Organisasi kemahasiswaan ini fokus pada pengembangan ilmu pengetahuan dan teknologi, khususnya melalui riset, inovasi berbasis teknologi hijau, dan kompetisi karya tulis ilmiah.</p>
+                </div>
+
+                <div class="timeline-item fade-up">
+                    <span class="timeline-date mono-text">2018 – 2024</span>
                     <h3 class="timeline-company">Universitas Negeri Semarang</h3>
-                    <p class="timeline-role">Desainer Senior</p>
-                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none;">Memimpin arahan
-                        visual dan arsitektur desain untuk klien gaya hidup premium.</p>
+                    <p class="timeline-role">S1 Pendidikan Teknik Mesin</p>
+                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none; text-align: justify;">Menyelesaikan studi Sarjana Pendidikan Teknik Mesin di Universitas Negeri Semarang (UNNES) dengan fokus pada penguasaan ilmu keteknikan mesin sekaligus metodologi pengajaran vokasional. Mempelajari bidang manufaktur, pemesinan, gambar teknik, dan teknologi, serta mengintegrasikannya ke dalam praktik pembelajaran di SMK. Memperoleh bekal kuat dalam merancang pembelajaran kejuruan yang kontekstual, berbasis kompetensi, dan relevan dengan kebutuhan industri.</p>
                 </div>
 
                 <div class="timeline-item fade-up">
-                    <span class="timeline-date mono-text">2021 – 2023</span>
-                    <h3 class="timeline-company">Agensi Lightform</h3>
-                    <p class="timeline-role">Developer UI</p>
-                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none;">Menerjemahkan
-                        desain kompleks menjadi kode frontend yang interaktif dan optimal.</p>
-                </div>
-
-                <div class="timeline-item fade-up">
-                    <span class="timeline-date mono-text">2019 – 2021</span>
-                    <h3 class="timeline-company">Freelance</h3>
-                    <p class="timeline-role">Kreatif Independen</p>
-                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none;">Berkolaborasi
-                        dengan berbagai startup untuk membangun identitas awal mereka.</p>
+                    <span class="timeline-date mono-text">2014 – 2018</span>
+                    <h3 class="timeline-company">SMK Negeri 2 Klaten</h3>
+                    <p class="timeline-role">Program Keahlian Teknik Pemesinan</p>
+                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none; text-align: justify;">Menempuh pendidikan menengah kejuruan di SMK Negeri 2 Klaten pada Program Keahlian Teknik Pemesinan, salah satu SMK terbaik di Jawa Tengah yang dikenal sebagai pusat keunggulan teknik. Selama tiga tahun, membangun fondasi kuat di bidang pengoperasian mesin bubut, mesin frais, mesin gerinda, dan gambar teknik manufaktur. Pengalaman di SMK inilah yang menumbuhkan kecintaan pada dunia teknik sekaligus menjadi titik awal perjalanan menjadi calon pendidik vokasional yang kompeten.</p>
                 </div>
                 </div>
             </section>
