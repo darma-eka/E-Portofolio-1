@@ -1,0 +1,4368 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKA SRI DARMA - UI/UX & Developer</title>
+
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="E-Portfolio Eka Sri Darma, Desainer UI/UX & Developer profesional.">
+    <meta name="theme-color" content="#0D0D0D">
+
+    <!-- Fonts: Bebas Neue, DM Serif Display, DM Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Serif+Display:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS Variables - Dark Editorial Luxury Theme */
+        :root {
+            --bg-color: #0B1E36;
+            /* Deep Navy Blue */
+            --text-color: #F5F0E8;
+            /* Bone White */
+            --accent-color: #FFB800;
+            /* Electric Amber */
+
+            --font-hero: 'Bebas Neue', sans-serif;
+            --font-sub: 'DM Serif Display', serif;
+            --font-mono: 'DM Mono', monospace;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+            /* Custom cursor */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-sub);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('pngtree-vector-batik-parang-pattern-white-chocolate-png-image_12657633.png');
+            background-repeat: repeat;
+            background-size: 300px;
+            opacity: 0.05;
+            /* Tekstur transparan agar warna biru tetap dominan */
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-circle {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+        }
+
+        .cursor-circle {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--text-color);
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Typography utility */
+        .mono-text {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 1.125rem 4rem;
+            background-color: rgba(11, 30, 54, 0.85);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            height: 54px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(255, 184, 0, 0.3));
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            filter: drop-shadow(0 0 16px rgba(255, 184, 0, 0.75));
+            transform: scale(1.08);
+        }
+
+        .brand-name {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.15;
+        }
+
+        .brand-name .brand-title {
+            font-family: var(--font-hero);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            text-transform: uppercase;
+        }
+
+        .brand-name .brand-sub {
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            letter-spacing: 1.5px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Dropdown Desktop */
+        .nav-item {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(11, 30, 54, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 280px;
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(245, 240, 232, 0.1);
+            z-index: 100;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(245, 240, 232, 0.8);
+            border-left: 2px solid transparent;
+        }
+
+        .dropdown-menu a::after {
+            display: none;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--accent-color);
+            background-color: rgba(255, 184, 0, 0.05);
+            border-left: 2px solid var(--accent-color);
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: 0.3s ease;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            z-index: 999;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .mobile-nav.open {
+            right: 0;
+        }
+
+        .mobile-nav a,
+        .mobile-dropdown-toggle {
+            font-family: var(--font-hero);
+            font-size: 4rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-dropdown-toggle:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Dropdown */
+        .mobile-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .mobile-dropdown-toggle .arrow {
+            font-size: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .mobile-item.open .mobile-dropdown-toggle .arrow {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+
+        .mobile-dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: max-height 0.4s ease, margin-top 0.4s ease;
+            width: 100%;
+        }
+
+        .mobile-item.open .mobile-dropdown-menu {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+
+        .mobile-dropdown-menu a {
+            font-size: 1.5rem;
+            font-family: var(--font-mono);
+            letter-spacing: 2px;
+            color: rgba(245, 240, 232, 0.7);
+        }
+
+        .mobile-dropdown-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Global Sections */
+        section {
+            padding: 8rem 4rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.5s;
+        }
+
+        /* 1. HERO SECTION */
+        .hero {
+            position: relative;
+            padding-top: 10rem;
+            justify-content: flex-start;
+        }
+
+        .hero-title {
+            font-family: var(--font-hero);
+            font-size: 13vw;
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+
+        .hero-title span {
+            display: block;
+        }
+
+        .hero-title .offset {
+            margin-left: 15vw;
+        }
+
+        .hero-profession {
+            margin-top: 2rem;
+            color: var(--accent-color);
+            margin-left: 15vw;
+        }
+
+        .marquee-wrapper {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            border-top: 1px solid rgba(245, 240, 232, 0.2);
+            border-bottom: 1px solid rgba(245, 240, 232, 0.2);
+            padding: 1.5rem 0;
+        }
+
+        .marquee {
+            display: flex;
+            width: fit-content;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee span {
+            font-family: var(--font-hero);
+            font-size: 3rem;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text-color);
+            white-space: nowrap;
+            padding: 0 2rem;
+            text-transform: uppercase;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 8rem;
+            right: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 0.8;
+        }
+
+        .scroll-indicator .mono-text {
+            writing-mode: vertical-rl;
+            font-size: 0.7rem;
+            transition: color 0.3s ease;
+        }
+
+        .scroll-indicator:hover .mono-text {
+            color: var(--accent-color);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background-color: rgba(245, 240, 232, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        .scroll-indicator:hover .scroll-line {
+            background-color: rgba(255, 184, 0, 0.3);
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: var(--accent-color);
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(-100%);
+            }
+
+            50% {
+                transform: translateY(200%);
+            }
+        }
+
+        /* 2. ABOUT SECTION */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            position: relative;
+        }
+
+        .about-quote {
+            font-size: 4rem;
+            line-height: 1.1;
+            font-style: italic;
+        }
+
+        .about-quote span {
+            color: var(--accent-color);
+        }
+
+        /* Paragraph Slider */
+        .about-right {
+            position: relative;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .para-slider-wrap {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            min-height: 260px;
+        }
+
+        .para-slides {
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .para-slide {
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-right: 0.5rem;
+        }
+
+        .about-desc {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .slide-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Dot Navigation */
+        .para-dots {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding-top: 0.5rem;
+        }
+
+        .para-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: rgba(245, 240, 232, 0.25);
+            border: none;
+            cursor: none;
+            transition: all 0.35s ease;
+            position: relative;
+        }
+
+        .para-dot::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+        }
+
+        .para-dot.active {
+            background-color: var(--accent-color);
+            box-shadow: 0 0 8px var(--accent-color);
+            transform: scale(1.4);
+        }
+
+        .para-dot:hover:not(.active) {
+            background-color: rgba(245, 240, 232, 0.6);
+            transform: scale(1.2);
+        }
+
+        /* Progress bar next to dots */
+        .para-progress-bar {
+            width: 1px;
+            height: 40px;
+            background-color: rgba(245, 240, 232, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .para-progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--accent-color);
+            transition: height 0.6s ease;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            padding: 0.6rem 1.5rem;
+            border: 1px solid var(--text-color);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+        }
+
+        .badge-vertical {
+            position: absolute;
+            top: 0;
+            right: -4rem;
+            transform: rotate(90deg) translateY(-100%);
+            transform-origin: top right;
+            color: var(--accent-color);
+            letter-spacing: 3px;
+            white-space: nowrap;
+        }
+
+        /* 2.5 REGION SECTION */
+        .region-section {
+            padding: 5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .region-card {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            background-color: #102A4A;
+            background-image: url('Peta Indonesia.png');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 2rem 3.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+        }
+
+        #inspirasi .region-card {
+            background-image: url('pngtree-black-and-white-mega-mendung-batik-seamless-cloud-pattern-vector-png-image_17662309.webp');
+        }
+
+        #inspirasi .region-text {
+            columns: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        }
+
+        /* TAB NAVIGATION */
+        .page-subnav {
+            display: flex;
+            justify-content: center;
+            gap: 3.5rem;
+            margin-bottom: 3rem;
+            z-index: 10;
+        }
+
+        .subnav-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        .subnav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .subnav-btn.active {
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(255, 184, 0, 0.3);
+        }
+
+        .subnav-btn.active:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 184, 0, 0.5);
+        }
+
+        .tab-pane {
+            display: none;
+            animation: tabPopup 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes tabPopup {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .region-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(11, 30, 54, 0.95) 0%, rgba(11, 30, 54, 0.7) 100%);
+            z-index: 1;
+        }
+
+        .region-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+        }
+
+        .region-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .region-title {
+            font-family: var(--font-hero);
+            font-size: 5rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .region-text {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 300;
+            text-align: justify;
+            opacity: 0.9;
+            columns: 3;
+            column-gap: 3rem;
+        }
+
+        .region-text p {
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+        }
+
+        @media (max-width: 1024px) {
+            .region-text {
+                columns: 2;
+            }
+
+            .region-card {
+                padding: 2rem 2rem;
+            }
+
+            .region-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .region-text {
+                columns: 1;
+            }
+
+            .region-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .region-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* 2.6 MOTIVASI SECTION */
+        .motivation-section {
+            padding: 5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .motivation-card {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            background-color: #1E3557;
+            /* biru pastel tipis / elegant muted slate blue */
+            color: var(--text-color);
+            /* Bone White */
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 4rem 5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+        }
+
+        .motivation-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+        }
+
+        .motivation-quote {
+            font-family: var(--font-sub);
+            /* serif */
+            font-style: italic;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            text-align: center;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 2rem;
+            margin: 0 auto;
+            max-width: 1000px;
+            position: relative;
+            color: var(--accent-color);
+        }
+
+        .motivation-subtitle {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .motivation-text {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 300;
+            text-align: justify;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .motivation-text p {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .motivation-card {
+                padding: 3rem;
+            }
+
+            .motivation-quote {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .motivation-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .motivation-card {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .motivation-quote {
+                font-size: 1.25rem;
+                padding-left: 1rem;
+                border-left-width: 3px;
+            }
+        }
+
+        /* 3. PROJECTS SECTION */
+        .section-header {
+            font-family: var(--font-hero);
+            font-size: 6rem;
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+        }
+
+/* ARTEFAK SECTION STYLING */
+        .artefak-subtitle {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        /* 1. Main Tab Capsule Control (Siklus) */
+        .siklus-capsule-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .siklus-capsule {
+            display: inline-flex;
+            background: rgba(16, 42, 74, 0.6); /* Muted slate/navy background */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 9999px;
+            padding: 0.4rem;
+            gap: 0.2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .siklus-tab-btn {
+            padding: 0.8rem 2.2rem;
+            border-radius: 9999px;
+            border: none;
+            background: transparent;
+            color: rgba(245, 240, 232, 0.6);
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .siklus-tab-btn:hover {
+            color: var(--text-color);
+        }
+
+        .siklus-tab-btn.active {
+            background: #c5f8c5; /* Pastel lime green */
+            color: #14532d;      /* Dark green text for strong contrast */
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(197, 248, 197, 0.2);
+        }
+
+        /* 2. Category Filter Pills */
+        .filter-pills-wrapper {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+
+        .filter-pill-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid rgba(245, 240, 232, 0.15);
+            color: rgba(245, 240, 232, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .filter-pill-btn:hover {
+            border-color: rgba(245, 240, 232, 0.6);
+            color: var(--text-color);
+        }
+
+        .filter-pill-btn.active {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: #4ade80; /* Vibrant light green */
+            color: #4ade80;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.15);
+        }
+
+        /* 3. Info Bar / Breadcrumbs */
+        .artefak-info-bar {
+            max-width: 1400px;
+            width: calc(100% - 8rem);
+            margin: 0 auto 3rem auto;
+            background: rgba(16, 42, 74, 0.4);
+            border: 1px solid rgba(74, 222, 128, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .info-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .info-bar-icon-badge {
+            background: #4ade80;
+            color: #0b1e36;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .info-bar-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-bar-count {
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .info-bar-desc {
+            color: rgba(245, 240, 232, 0.5);
+            font-size: 0.75rem;
+            margin-top: 0.1rem;
+        }
+
+        .info-bar-right {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: rgba(245, 240, 232, 0.4);
+            letter-spacing: 1px;
+            text-align: right;
+        }
+
+        /* 4. Elegant Document Card Grid */
+        .artefak-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        .artefak-card {
+            position: relative;
+            background: rgba(16, 42, 74, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .artefak-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 184, 0, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .artefak-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 184, 0, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .artefak-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Container Thumbnail Gambar */
+        .artefak-card-thumb {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1;
+        }
+
+        .artefak-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .artefak-card:hover .artefak-card-thumb img {
+            transform: scale(1.08);
+        }
+
+        /* PDF Preview inside Penilaian Cards */
+        .penilaian-pdf-thumb {
+            position: relative;
+            width: 100%;
+            height: 360px;
+            overflow: hidden;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: #fff;
+        }
+
+        .penilaian-pdf-thumb iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+        }
+
+        .penilaian-pdf-thumb:hover iframe {
+            pointer-events: auto;
+        }
+
+        .penilaian-pdf-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to top, rgba(10, 15, 30, 1), transparent);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Diagonal Ribbon for PDF Badge */
+        .artefak-ribbon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .artefak-ribbon::after {
+            content: 'PDF';
+            position: absolute;
+            top: 10px;
+            left: -22px;
+            width: 75px;
+            height: 22px;
+            background: linear-gradient(90deg, #102a4a 0%, #1e3557 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 20px;
+            transform: rotate(-45deg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Category Tag on the top right */
+        .artefak-tag {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: rgba(255, 184, 0, 0.15);
+            color: var(--accent-color);
+            border: 1px solid rgba(255, 184, 0, 0.3);
+            backdrop-filter: blur(4px);
+            z-index: 3;
+        }
+
+        .artefak-card-body {
+            padding: 1.8rem 2rem 0 2rem;
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            z-index: 2;
+        }
+
+        .artefak-card-title {
+            font-family: var(--font-hero);
+            font-size: 1.8rem;
+            line-height: 1.2;
+            text-transform: uppercase;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .artefak-card:hover .artefak-card-title {
+            color: var(--accent-color);
+        }
+
+        .artefak-card-desc {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: rgba(245, 240, 232, 0.7);
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        .artefak-card-footer {
+            padding: 0 2rem 1.8rem 2rem;
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .artefak-btn {
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            border: 1px solid rgba(245, 240, 232, 0.2);
+            background: transparent;
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            cursor: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Amber Analisis Button on bottom-left */
+        .artefak-btn-analisis {
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 184, 0, 0.3);
+            background: rgba(255, 184, 0, 0.05);
+            color: var(--accent-color);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            cursor: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 5;
+        }
+
+        .artefak-btn-analisis:hover {
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(255, 184, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Premium Analisis Modal Popup Styles */
+        .analisis-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(11, 30, 54, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .analisis-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .analisis-modal {
+            background: linear-gradient(145deg, #102a4a, #0b1e36);
+            border: 1px solid rgba(255, 184, 0, 0.2);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 184, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.95) translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .analisis-modal-overlay.active .analisis-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .analisis-modal-header {
+            padding: 1.8rem 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(16, 42, 74, 0.3);
+        }
+
+        .analisis-modal-title-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .analisis-modal-tag {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .analisis-modal-title {
+            font-family: var(--font-hero);
+            font-size: 2rem;
+            color: var(--text-color);
+            line-height: 1.15;
+            letter-spacing: 1px;
+        }
+
+        .analisis-modal-close {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .analisis-modal-close:hover {
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(255, 184, 0, 0.4);
+            transform: rotate(90deg);
+        }
+
+        .analisis-modal-body {
+            padding: 2.5rem;
+            overflow-y: auto;
+            flex: 1;
+            font-family: var(--font-sub);
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) rgba(0, 0, 0, 0.2);
+        }
+
+        .analisis-modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .analisis-modal-body::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .analisis-modal-body::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .analisis-sec {
+            margin-bottom: 2.5rem;
+            animation: modalContentFadeUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        @keyframes modalContentFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .analisis-sec-title {
+            font-family: var(--font-hero);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            border-bottom: 1px solid rgba(255, 184, 0, 0.2);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .analisis-text {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: rgba(245, 240, 232, 0.85);
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .analisis-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1.2rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: rgba(245, 240, 232, 0.85);
+        }
+
+        .analisis-list li {
+            margin-bottom: 0.6rem;
+            line-height: 1.6;
+        }
+
+        .analisis-sub-sec {
+            margin-top: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .analisis-sub-title {
+            font-family: var(--font-sub);
+            font-size: 1.05rem;
+            color: var(--text-color);
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .analisis-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            background: rgba(16, 42, 74, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .analisis-table th,
+        .analisis-table td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+
+        .analisis-table th {
+            background-color: rgba(255, 184, 0, 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255, 184, 0, 0.2);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .analisis-table td {
+            color: rgba(245, 240, 232, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.5;
+        }
+
+        .analisis-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .analisis-table tr:hover td {
+            background: rgba(255, 184, 0, 0.02);
+            color: var(--text-color);
+        }
+
+        .analisis-box {
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .analisis-box.kelebihan {
+            background: rgba(46, 204, 113, 0.08);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+
+        .analisis-box.kekurangan {
+            background: rgba(231, 76, 60, 0.08);
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .analisis-modal {
+                width: 95%;
+                max-height: 90vh;
+            }
+            .analisis-modal-header {
+                padding: 1.2rem 1.5rem;
+            }
+            .analisis-modal-title {
+                font-size: 1.5rem;
+            }
+            .analisis-modal-body {
+                padding: 1.5rem;
+            }
+            .analisis-table th, .analisis-table td {
+                padding: 0.8rem 1rem;
+            }
+        }
+
+        .artefak-btn:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+        }
+
+        @media (max-width: 1024px) {
+            .artefak-grid {
+                padding: 0 2rem;
+            }
+            .artefak-info-bar {
+                width: calc(100% - 4rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .artefak-grid {
+                padding: 0 1.5rem;
+                grid-template-columns: 1fr;
+            }
+            .artefak-info-bar {
+                width: calc(100% - 3rem);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .info-bar-right {
+                text-align: left;
+            }
+            .siklus-tab-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 4. EXPERIENCE SECTION */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background-color: rgba(245, 240, 232, 0.2);
+        }
+
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 0;
+            background-color: var(--accent-color);
+            z-index: 1;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 2rem 3rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 2.5rem;
+            width: 14px;
+            height: 14px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -7px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -7px;
+        }
+
+        .timeline-date {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .timeline-company {
+            font-family: var(--font-hero);
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-role {
+            font-style: italic;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* 4.5 MODEL GURU SECTION */
+        .model-guru-section {
+            padding: 8rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .model-guru-intro {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .model-guru-intro p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.8;
+        }
+
+        .misi-container {
+            margin-bottom: 6rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 4rem;
+        }
+
+        .misi-title, .kompetensi-title {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .misi-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .misi-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .misi-icon {
+            font-size: 2rem;
+            background: rgba(255, 184, 0, 0.1);
+            color: var(--accent-color);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .misi-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .misi-content p {
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .kompetensi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .kompetensi-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+
+        .kompetensi-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(255, 184, 0, 0.1);
+        }
+
+        .kompetensi-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .kompetensi-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .kompetensi-card .strategy {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .kompetensi-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        /* 5. CONTACT SECTION */
+        .contact {
+            text-align: center;
+            align-items: center;
+        }
+
+        .contact-cta {
+            font-family: var(--font-hero);
+            font-size: 9vw;
+            line-height: 0.9;
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+        }
+
+        .contact-cta span {
+            color: var(--accent-color);
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 4rem;
+            justify-content: center;
+        }
+
+        .contact-link {
+            font-family: var(--font-hero);
+            font-size: 3rem;
+            color: var(--text-color);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .contact-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid rgba(245, 240, 232, 0.1);
+            opacity: 0.6;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .about-container {
+                gap: 3rem;
+            }
+
+            .about-quote {
+                font-size: 3rem;
+            }
+
+            .project-card {
+                aspect-ratio: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            * {
+                cursor: auto;
+            }
+
+            /* Disable custom cursor on mobile */
+            .cursor-dot,
+            .cursor-circle {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            section {
+                padding: 6rem 2rem;
+            }
+
+            .navbar {
+                padding: 1.5rem 2rem;
+            }
+
+            .navbar.scrolled {
+                padding: 1rem 2rem;
+            }
+
+            .hero-title {
+                font-size: 18vw;
+            }
+
+            .hero-title .offset {
+                margin-left: 0;
+            }
+
+            .hero-profession {
+                margin-left: 0;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .badge-vertical {
+                display: none;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-progress {
+                left: 0;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 2.5rem !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-item::after {
+                left: -7px !important;
+            }
+
+            .contact-cta {
+                font-size: 14vw;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .scroll-indicator {
+                right: 2rem;
+            }
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-color);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .loading-screen.hidden {
+            transform: translateY(-100vh);
+        }
+
+        .loading-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .loading-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .loading-logo {
+            height: 120px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 16px rgba(255, 184, 0, 0.4));
+            animation: pulse-logo 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-logo {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 16px rgba(255, 184, 0, 0.4));
+            }
+
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 24px rgba(255, 184, 0, 0.7));
+            }
+        }
+
+        .loading-text {
+            color: var(--accent-color);
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            animation: blink-text 2s infinite ease-in-out;
+        }
+
+        @keyframes blink-text {
+
+            0%,
+            100% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .loading-image {
+            height: 120px;
+            width: auto;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            /* Membantu gambar menyatu dengan background gelap */
+            filter: drop-shadow(0 0 16px rgba(255, 184, 0, 0.4));
+            animation: pulse-logo 2.5s infinite ease-in-out;
+        }
+
+        /* ===== GALERI DOKUMENTASI ===== */
+        .galeri-section {
+            padding: 8rem 4rem;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== VIDEO PRAKTIK ===== */
+        .video-section {
+            padding: 2rem 4rem 8rem 4rem;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 184, 0, 0.1);
+            background: var(--surface-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            width: 100%;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .galeri-subtitle {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            font-weight: 500;
+        }
+
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        /* First item spans 2 columns for editorial layout */
+        .galeri-item:first-child {
+            grid-column: span 2;
+            aspect-ratio: 16/9;
+        }
+
+        .galeri-item {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            background: rgba(16, 42, 74, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        box-shadow 0.4s ease,
+                        border-color 0.4s ease;
+        }
+
+        .galeri-item:hover {
+            transform: scale(1.025);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
+            border-color: rgba(255, 184, 0, 0.35);
+        }
+
+        .galeri-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+            display: block;
+        }
+
+        .galeri-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .galeri-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(11, 30, 54, 0.97) 0%,
+                rgba(11, 30, 54, 0.3) 50%,
+                transparent 100%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.8rem;
+        }
+
+        .galeri-item:hover .galeri-overlay {
+            opacity: 1;
+        }
+
+        .galeri-caption-title {
+            font-family: var(--font-hero);
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+            transform: translateY(8px);
+            transition: transform 0.4s ease;
+        }
+
+        .galeri-item:hover .galeri-caption-title {
+            transform: translateY(0);
+        }
+
+        .galeri-caption {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: rgba(245, 240, 232, 0.65);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transform: translateY(8px);
+            transition: transform 0.4s ease 0.05s;
+        }
+
+        .galeri-item:hover .galeri-caption {
+            transform: translateY(0);
+        }
+
+        /* Zoom icon badge */
+        .galeri-zoom-badge {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 184, 0, 0.15);
+            border: 1px solid rgba(255, 184, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .galeri-item:hover .galeri-zoom-badge {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 12, 25, 0.97);
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-img-wrap {
+            position: relative;
+            max-width: 88vw;
+            max-height: 82vh;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 82vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.9);
+            display: block;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 1.8rem;
+            right: 2rem;
+            background: rgba(245, 240, 232, 0.08);
+            border: 1px solid rgba(245, 240, 232, 0.15);
+            color: var(--text-color);
+            font-size: 1.4rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 184, 0, 0.15);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 184, 0, 0.08);
+            border: 1px solid rgba(255, 184, 0, 0.2);
+            color: var(--accent-color);
+            font-size: 2rem;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 184, 0, 0.2);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.2);
+        }
+
+        .lightbox-prev { left: 1.5rem; }
+        .lightbox-next { right: 1.5rem; }
+
+        .lightbox-caption-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(5, 12, 25, 0.95), transparent);
+            text-align: center;
+        }
+
+        .lightbox-caption-title {
+            font-family: var(--font-hero);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .lightbox-caption-desc {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: rgba(245, 240, 232, 0.5);
+            letter-spacing: 1.5px;
+        }
+
+        .lightbox-counter {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: rgba(245, 240, 232, 0.4);
+            letter-spacing: 3px;
+            background: rgba(255,255,255,0.05);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        @media (max-width: 1024px) {
+            .kompetensi-grid { grid-template-columns: repeat(2, 1fr); }
+            .galeri-grid { grid-template-columns: repeat(2, 1fr); }
+            .galeri-item:first-child { grid-column: span 2; }
+        }
+
+        @media (max-width: 768px) {
+            .model-guru-section { padding: 4rem 1.5rem; }
+            .kompetensi-grid { grid-template-columns: 1fr; }
+            .misi-container { padding: 2rem; }
+            .misi-item { flex-direction: column; text-align: center; align-items: center; }
+            .galeri-section { padding: 6rem 1.5rem; }
+            .video-section { padding: 2rem 1.5rem 6rem 1.5rem; }
+            .galeri-grid { grid-template-columns: 1fr; }
+            .galeri-item:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+            .lightbox-nav { width: 40px; height: 40px; font-size: 1.5rem; }
+            .lightbox-prev { left: 0.5rem; }
+            .lightbox-next { right: 0.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#hero" class="nav-brand">
+            <img src="Our_Work2.png" alt="Our Work"
+                style="height: 54px; width: auto; object-fit: contain; mix-blend-mode: screen;">
+            <img src="unnamed.png" alt="Logo Universitas Sarjanawiyata Tamansiswa" class="brand-logo">
+        </a>
+        <div class="nav-links mono-text">
+            <a href="#hero">Beranda</a>
+            <div class="nav-item">
+                <a href="#about" class="dropdown-toggle">Profil ▾</a>
+                <div class="dropdown-menu">
+                    <a href="#asal-daerah">Asal & Keunikan Daerah</a>
+                    <a href="#inspirasi">Inspirasi & Visi Menjadi Guru</a>
+                    <a href="#motivasi">Motivasi</a>
+                    <a href="#experience">Pengalaman</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#work" class="dropdown-toggle nav-filter-link" data-filter-category="all" data-filter-siklus="all">Artefak ▾</a>
+                <div class="dropdown-menu">
+                    <a href="#work" data-filter-category="RPP" data-filter-siklus="all" class="nav-filter-link">Rencana Pelaksanaan Pembelajaran (RPP)</a>
+                    <a href="#work" data-filter-category="BAHAN AJAR" data-filter-siklus="all" class="nav-filter-link">Bahan Ajar</a>
+                    <a href="#work" data-filter-category="LKM" data-filter-siklus="all" class="nav-filter-link">Lembar Kerja Murid</a>
+                    <a href="#work" data-filter-category="MEDIA" data-filter-siklus="all" class="nav-filter-link">Media Pembelajaran</a>
+                    <a href="#work" data-filter-category="ASESMEN" data-filter-siklus="all" class="nav-filter-link">Instrumen Asesmen</a>
+                    <a href="#galeri-dokumentasi" class="nav-filter-link">Galeri Dokumentasi</a>
+                </div>
+            </div>
+            <a href="#analisis">Analisis</a>
+            <a href="#penilaian">Penilaian</a>
+            <div class="nav-item">
+                <a href="#model-guru" class="dropdown-toggle">Model Guru ▾</a>
+                <div class="dropdown-menu">
+                    <a href="#misi">Misi Keguruan</a>
+                    <a href="#kompetensi">Kompetensi & Karakter</a>
+                </div>
+            </div>
+            <a href="#contact">Kontak</a>
+        </div>
+        <button class="hamburger" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-nav">
+        <a href="#hero" class="mobile-link">BERANDA</a>
+        <div class="mobile-item">
+            <span class="mobile-dropdown-toggle">PROFIL <span class="arrow">▾</span></span>
+            <div class="mobile-dropdown-menu">
+                <a href="#asal-daerah" class="mobile-link">Asal & Keunikan Daerah</a>
+                <a href="#inspirasi" class="mobile-link">Inspirasi & Visi Menjadi Guru</a>
+                <a href="#motivasi" class="mobile-link">Motivasi</a>
+                <a href="#experience" class="mobile-link">PENGALAMAN</a>
+            </div>
+        </div>
+        <div class="mobile-item">
+            <span class="mobile-dropdown-toggle">ARTEFAK <span class="arrow">▾</span></span>
+            <div class="mobile-dropdown-menu">
+                <a href="#work" data-filter-category="RPP" data-filter-siklus="all" class="mobile-link nav-filter-link">Rencana Pelaksanaan Pembelajaran (RPP)</a>
+                <a href="#work" data-filter-category="BAHAN AJAR" data-filter-siklus="all" class="mobile-link nav-filter-link">Bahan Ajar</a>
+                <a href="#work" data-filter-category="LKM" data-filter-siklus="all" class="mobile-link nav-filter-link">Lembar Kerja Murid</a>
+                <a href="#work" data-filter-category="MEDIA" data-filter-siklus="all" class="mobile-link nav-filter-link">Media Pembelajaran</a>
+                <a href="#work" data-filter-category="ASESMEN" data-filter-siklus="all" class="mobile-link nav-filter-link">Instrumen Asesmen</a>
+                <a href="#galeri-dokumentasi" class="mobile-link">Galeri Dokumentasi</a>
+            </div>
+        </div>
+        <a href="#analisis" class="mobile-link">ANALISIS</a>
+        <a href="#penilaian" class="mobile-link">PENILAIAN</a>
+        <div class="mobile-item">
+            <span class="mobile-dropdown-toggle">MODEL GURU <span class="arrow">▾</span></span>
+            <div class="mobile-dropdown-menu">
+                <a href="#misi" class="mobile-link">Misi Keguruan</a>
+                <a href="#kompetensi" class="mobile-link">Kompetensi & Karakter</a>
+            </div>
+        </div>
+        <a href="#contact" class="mobile-link">KONTAK</a>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <h1 class="hero-title fade-up delay-1">
+                <span>Eka Sri</span>
+                <span class="offset">Darma</span>
+            </h1>
+
+            <div class="marquee-wrapper fade-up delay-3">
+                <div class="marquee">
+                    <span>Mahasiswa PPG Calon Guru</span>
+                    <span>•</span>
+                    <span>Pendidikan Teknik Mesin</span>
+                    <span>•</span>
+                    <span>Mahasiswa PPG Calon Guru</span>
+                    <span>•</span>
+                    <span>Pendidikan Teknik Mesin</span>
+                    <span>•</span>
+                    <span>Mahasiswa PPG Calon Guru</span>
+                    <span>•</span>
+                    <span>Pendidikan Teknik Mesin</span>
+                    <span>•</span>
+                </div>
+            </div>
+
+            <a href="#about" class="scroll-indicator fade-up delay-3">
+                <span class="mono-text">SCROLL</span>
+                <div class="scroll-line"></div>
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="about-container">
+                <div class="about-left fade-up">
+                    <h2 class="about-quote">"Desain bukan hanya apa yang terlihat, tetapi <span>bagaimana ia
+                            bekerja.</span>"</h2>
+                </div>
+                <div class="about-right fade-up delay-1">
+                    <!-- Paragraph Slider -->
+                    <div class="para-slider-wrap" id="paraSliderWrap">
+                        <div class="para-slides" id="paraSlides">
+
+                            <!-- Slide 1 -->
+                            <div class="para-slide">
+                                <div>
+                                    <div class="slide-label">01 / Profil</div>
+                                    <p class="about-desc">Saya adalah Eka Sri Darma, mahasiswa Program Pendidikan
+                                        Profesi Guru (PPG) di Universitas Sarjanawiyata Tamansiswa (UST) Yogyakarta.
+                                        Dengan semangat dan komitmen penuh, saya mempersiapkan diri menjadi pendidik
+                                        profesional yang mampu memberikan pengalaman belajar bermakna bagi setiap
+                                        peserta didik.</p>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="para-slide">
+                                <div>
+                                    <div class="slide-label">02 / Kompetensi</div>
+                                    <p class="about-desc">Melalui program PPG, saya mengembangkan kompetensi pedagogik,
+                                        profesional, kepribadian, dan sosial sebagai fondasi menjadi guru yang
+                                        berintegritas dan berdampak. Saya percaya bahwa pendidikan adalah investasi
+                                        terbaik bagi masa depan bangsa.</p>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="para-slide">
+                                <div>
+                                    <div class="slide-label">03 / Nilai</div>
+                                    <p class="about-desc">Tumbuh dari nilai-nilai Tamansiswa yang menjunjung tinggi
+                                        kebebasan, kebudayaan, dan kemanusiaan, saya berkomitmen untuk menjadi guru yang
+                                        tidak hanya mentransfer ilmu, namun juga menginspirasi dan memberdayakan setiap
+                                        siswa.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Dot Navigation -->
+                    <div class="para-dots" id="paraDots" aria-label="Navigasi paragraf">
+                        <button class="para-dot active" data-index="0" aria-label="Slide 1"></button>
+                        <button class="para-dot" data-index="1" aria-label="Slide 2"></button>
+                        <button class="para-dot" data-index="2" aria-label="Slide 3"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Region Section -->
+        <section id="asal-daerah" class="region-section">
+            <h2 class="region-title fade-up">Asal & Keunikan Daerah</h2>
+            <div class="region-card fade-up delay-1">
+                <div class="region-content">
+                    <div class="region-text">
+                        <p>Perkenalkan, saya Eka Sri Darma. Saya lahir dan tumbuh di Manisrenggo, Kabupaten Klaten,
+                            sebuah daerah istimewa di lereng Gunung Merapi yang diberkahi tanah yang subur serta warisan
+                            sejarah yang agung. Daerah asal saya adalah rumah bagi Candi Plaosan yang megah—sebuah
+                            simbol harmoni, toleransi, dan mahakarya peradaban masa lalu. Nilai-nilai gotong royong,
+                            ketangguhan masyarakat lereng gunung, serta filosofi edukasi yang terpahat pada relief candi
+                            di daerah saya telah membentuk karakter saya menjadi pribadi yang adaptif dan menghargai
+                            keberagaman. Dari tanah penuh sejarah inilah, tumbuh inspirasi besar dalam diri saya untuk
+                            menjadi seorang pendidik.</p>
+                        <p>Melihat bagaimana relief-relief Candi Sojiwan di Manisrenggo mampu menyampaikan pesan moral
+                            dan edukasi melintasi abad, saya menyadari bahwa sejatinya mengajar adalah seni abadi untuk
+                            menanamkan nilai kebaikan. Panggilan jiwa ini semakin menguat ketika saya melihat dinamika
+                            anak-anak di daerah saya; mereka membutuhkan pemandu yang tidak hanya mentransfer ilmu,
+                            tetapi juga menumbuhkan karakter yang tangguh, adaptif, dan berbudaya di tengah perkembangan
+                            zaman.</p>
+                        <p>Melalui program Pendidikan Profesi Guru (PPG) ini, tujuan utama saya adalah
+                            mentransformasikan diri menjadi guru yang profesional, inovatif, dan berpihak pada murid.
+                            Saya berkomitmen untuk merancang pembelajaran yang bermakna, mengintegrasikan teknologi
+                            tanpa kehilangan akar kearifan lokal, serta menciptakan ruang kelas yang aman dan inklusif
+                            bagi setiap keunikan peserta didik. Bagi saya, menjadi guru bukan sekadar profesi, melainkan
+                            sebuah pengabdian untuk mengukir masa depan bangsa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inspirasi Section -->
+        <section id="inspirasi" class="region-section">
+            <h2 class="region-title fade-up">Inspirasi & Visi Menjadi Guru</h2>
+
+            <div class="page-subnav fade-up delay-1">
+                <button class="subnav-btn active" data-target="tab-inspirasi">Inspirasi</button>
+                <button class="subnav-btn" data-target="tab-visi">Visi Pendidikan</button>
+            </div>
+
+            <div class="region-card fade-up delay-2">
+                <div class="region-content">
+                    <!-- Tab Inspirasi -->
+                    <div id="tab-inspirasi" class="tab-pane active">
+                        <div class="region-text">
+                            <p
+                                style="text-align: center; font-size: 1.3rem; color: var(--accent-color); margin-bottom: 2rem;">
+                                <strong>Menyalakan Lentera, Mengukir Masa Depan</strong>
+                            </p>
+                            <p>Perjalanan saya untuk memilih jalan pengabdian sebagai seorang pendidik bukanlah sebuah
+                                kebetulan, melainkan sebuah panggilan jiwa (calling) yang tumbuh dari refleksi mendalam
+                                terhadap realitas di sekitar saya.</p>
+                            <p>Inspirasi terbesar saya lahir ketika menyadari bahwa tantangan terbesar generasi muda
+                                saat ini bukan lagi sekadar akses terhadap informasi, melainkan bagaimana mengolah
+                                informasi tersebut menjadi ilmu yang bermanfaat dan karakter yang bijaksana. Di era
+                                digital yang bergerak begitu cepat, anak-anak membutuhkan lebih dari sekadar "mesin
+                                pencari" atau buku teks berjalan; mereka membutuhkan seorang teladan, mentor, dan
+                                fasilitator yang mampu menuntun mereka menemukan potensi terbaiknya. Saya ingin menjadi
+                                bagian dari sistem pendukung yang menyelamatkan masa depan mereka.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tab Visi -->
+                    <div id="tab-visi" class="tab-pane">
+                        <div class="region-text">
+                            <p>Visi saya sebagai seorang guru profesional adalah "Mewujudkan ekosistem belajar yang
+                                berpihak pada murid, yang tidak hanya menuntut pencapaian akademik, tetapi juga menuntun
+                                tumbuh kembangnya budi pekerti luhur sesuai dengan kodrat alam dan kodrat zaman mereka."
+                            </p>
+                            <p>Secara konkret, tujuan yang ingin saya capai dalam karier keguruan saya ke depan adalah:
+                            </p>
+                            <p>1. <strong>Menjadi Guru Penjelajah yang Inovatif:</strong> Terus memperbarui strategi
+                                pembelajaran yang interaktif dan berbasis teknologi, tanpa menanggalkan nilai kearifan
+                                budaya lokal.</p>
+                            <p>2. <strong>Membangun Ruang Kelas yang Inklusif:</strong> Memastikan tidak ada satu pun
+                                anak yang merasa tertinggal atau diabaikan karena setiap anak memiliki keunikan cara
+                                belajar (differentiated learning).</p>
+                            <p>3. <strong>Menjadi Pembelajar Sepanjang Hayat:</strong> Konsisten melakukan refleksi diri
+                                atas praktik mengajar yang saya lakukan demi meningkatkan mutu pendidikan secara
+                                berkelanjutan.</p>
+                            <p>Bagi saya, setiap ruang kelas adalah laboratorium peradaban. Di sanalah, dengan segenap
+                                kompetensi profesional yang telah saya asah, saya siap mendedikasikan hidup untuk
+                                menuntun anak-anak bangsa menjemput masa depan mereka dengan penuh percaya diri.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Motivasi Section -->
+        <section id="motivasi" class="motivation-section">
+            <h2 class="region-title fade-up">Motivasi</h2>
+            <div class="motivation-card fade-up delay-1">
+                <blockquote class="motivation-quote">
+                    "Mengajar bukan tentang memaksa setiap anak melangkah di jalan yang sama, melainkan tentang menuntun
+                    kodrat unik mereka agar mampu bersinar di jalannya masing-masing dengan budi pekerti yang luhur."
+                </blockquote>
+
+                <div class="motivation-divider"
+                    style="width: 80px; height: 1px; background: rgba(255,255,255,0.15); margin: 0.5rem auto;"></div>
+
+                <h3 class="motivation-subtitle">Makna di Balik Prinsip</h3>
+
+                <div class="motivation-text">
+                    <p>Terinspirasi dari filosofi pendidikan Ki Hadjar Dewantara, saya meyakini bahwa anak bukanlah
+                        kertas kosong yang bisa digambar sesuka hati oleh orang dewasa, melainkan sehelai kertas yang
+                        sudah memiliki pola samar sejak lahir.</p>
+                    <p>Tugas saya sebagai seorang pendidik bukanlah mengubah atau memaksakan kehendak agar semua anak
+                        seragam, melainkan menuntun (pamong) dan mempertebal pola-pola baik yang ada di dalam diri
+                        mereka. Setiap peserta didik memiliki potensi, gaya belajar, dan kecerdasan unik yang
+                        berbeda-beda (differentiated potential). Dengan memberikan ruang yang merdeka namun tetap
+                        terarah, serta konsisten menanamkan budi pekerti dan nilai-nilai karakter, saya berkomitmen
+                        untuk mengantarkan mereka menjadi versi terbaik dari diri mereka sendiri demi menyongsong masa
+                        depan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience">
+            <h2 class="section-header fade-up">Perjalanan</h2>
+            <div class="timeline">
+                <div class="timeline-progress"></div>
+
+                <div class="timeline-item fade-up">
+                    <span class="timeline-date mono-text">2023 – Sekarang</span>
+                    <h3 class="timeline-company">Universitas Negeri Semarang</h3>
+                    <p class="timeline-role">Desainer Senior</p>
+                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none;">Memimpin arahan
+                        visual dan arsitektur desain untuk klien gaya hidup premium.</p>
+                </div>
+
+                <div class="timeline-item fade-up">
+                    <span class="timeline-date mono-text">2021 – 2023</span>
+                    <h3 class="timeline-company">Agensi Lightform</h3>
+                    <p class="timeline-role">Developer UI</p>
+                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none;">Menerjemahkan
+                        desain kompleks menjadi kode frontend yang interaktif dan optimal.</p>
+                </div>
+
+                <div class="timeline-item fade-up">
+                    <span class="timeline-date mono-text">2019 – 2021</span>
+                    <h3 class="timeline-company">Freelance</h3>
+                    <p class="timeline-role">Kreatif Independen</p>
+                    <p class="mono-text" style="opacity: 0.7; font-size: 0.8rem; text-transform: none;">Berkolaborasi
+                        dengan berbagai startup untuk membangun identitas awal mereka.</p>
+                </div>
+                </div>
+            </section>
+
+            <!-- Section Artefak -->
+        <section id="work" class="projects">
+            <h2 class="section-header fade-up" style="text-align: center;">Artefak</h2>
+            
+            <!-- 1. Siklus Tab Capsule Bar -->
+            <div class="siklus-capsule-wrapper fade-up delay-1">
+                <div class="siklus-capsule">
+                    <button class="siklus-tab-btn active" data-siklus="all">Semua Siklus</button>
+                    <button class="siklus-tab-btn" data-siklus="1">Siklus 1</button>
+                    <button class="siklus-tab-btn" data-siklus="2">Siklus 2</button>
+                    <button class="siklus-tab-btn" data-siklus="3">Siklus 3</button>
+                </div>
+            </div>
+
+            <!-- 2. Category Filter Pills -->
+            <div class="filter-pills-wrapper fade-up delay-2">
+                <button class="filter-pill-btn active" data-category="all">SEMUA</button>
+                <button class="filter-pill-btn" data-category="RPP">RPP</button>
+                <button class="filter-pill-btn" data-category="BAHAN AJAR">BAHAN AJAR</button>
+                <button class="filter-pill-btn" data-category="LKM">LKM</button>
+                <button class="filter-pill-btn" data-category="MEDIA">MEDIA</button>
+                <button class="filter-pill-btn" data-category="ASESMEN">ASESMEN</button>
+                <button class="filter-pill-btn" data-category="LAINNYA">LAINNYA</button>
+            </div>
+
+            <!-- 3. Glassmorphic Info Bar -->
+            <div class="artefak-info-bar fade-up delay-2">
+                <div class="info-bar-left">
+                    <div class="info-bar-icon-badge">
+                        <span>📄</span>
+                    </div>
+                    <div class="info-bar-details">
+                        <span class="info-bar-count" id="artefak-active-count">18 artefak tampil</span>
+                        <span class="info-bar-desc">Filter aktif bisa diganti per siklus atau kategori.</span>
+                    </div>
+                </div>
+                <div class="info-bar-right" id="artefak-breadcrumb">
+                    PUBLIC / ARTEFAK / SEMUA SIKLUS / SEMUA
+                </div>
+            </div>
+
+            <!-- 4. Dynamic Document Grid -->
+            <div class="artefak-grid fade-up delay-3" id="artefak-container">
+                
+                <!-- === SIKLUS 1 ARTEFAK === -->
+                <div class="artefak-card" data-siklus="1" data-category="RPP">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_rpp.png" alt="Thumbnail RPP">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">RPP</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">RPP Siklus 1 - Penggunaan Dividing Head</h3>
+                        <p class="artefak-card-desc">Rencana Pelaksanaan Pembelajaran Siklus 1 mengenai dasar-dasar pengoperasian mesin bubut dan prosedur keselamatan kerja (K3).</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="ARTEFAK/Siklus%201/RPP/RPP%20Siklus%201%20Materi%20Segi%20Enam.pdf" class="artefak-btn" target="_blank">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="1" data-category="BAHAN AJAR">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_bahan_ajar.png" alt="Thumbnail Bahan Ajar">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">BAHAN AJAR</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Materi Siklus 1 - Penggunaan Dividing Head</h3>
+                        <p class="artefak-card-desc">Bahan ajar lengkap yang memuat formula perhitungan kecepatan potong (Cutting Speed) dan putaran mesin (RPM).</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="1" data-category="LKM">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_lkm.png" alt="Thumbnail LKM">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">LKM</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">LKM Siklus 1 - Penggunaan Dividing Head</h3>
+                        <p class="artefak-card-desc">Panduan langkah praktikum siswa untuk melakukan proses pembubutan memanjang dan pembubutan bertingkat.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="1" data-category="MEDIA">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_media.png" alt="Thumbnail Media Pembelajaran">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">MEDIA</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Media Presentasi Siklus 1 - Penggunaan Dividing Head</h3>
+                        <p class="artefak-card-desc">Media visual interaktif pengenalan tuas transmisi, kepala tetap, eretan, dan kepala lepas pada mesin bubut.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="1" data-category="ASESMEN">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_asesmen.png" alt="Thumbnail Instrumen Asesmen">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">ASESMEN</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Instrumen Asesmen Siklus 1 - Penggunaan Dividing Head</h3>
+                        <p class="artefak-card-desc">Format instrumen asesmen keterampilan berupa checklist pengukuran ketelitian dimensi benda kerja bubut.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="1" data-category="LAINNYA">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_lainnya.png" alt="Thumbnail Lainnya">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">LAINNYA</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Video Apersepsi K3 Bubut</h3>
+                        <p class="artefak-card-desc">Video singkat untuk memotivasi siswa tentang pentingnya mengenakan kacamata pelindung dan alat pengaman kerja.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <!-- === SIKLUS 2 ARTEFAK === -->
+                <div class="artefak-card" data-siklus="2" data-category="RPP">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_rpp.png" alt="Thumbnail RPP">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">RPP</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">RPP Siklus 2 - Parameter Pemotongan</h3>
+                        <p class="artefak-card-desc">RPP Siklus 2 tentang pengenalan mesin frais (milling machine), prinsip pemotongan, dan metode pengefraisan rata.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="2" data-category="BAHAN AJAR">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_bahan_ajar.png" alt="Thumbnail Bahan Ajar">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">BAHAN AJAR</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Materi Siklus 2 - Parameter Pemotongan</h3>
+                        <p class="artefak-card-desc">Bahan ajar mengenai ragam cutter mesin frais seperti end mill, slab mill, gear cutter, serta kesesuaian penggunaannya.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="2" data-category="LKM">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_lkm.png" alt="Thumbnail LKM">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">LKM</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">LKM Siklus 2 - Parameter Pemotongan</h3>
+                        <p class="artefak-card-desc">Instruksi kerja praktikum pembuatan blok mesin persegi presisi dengan sudut tegak lurus (90 derajat).</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="2" data-category="MEDIA">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_media.png" alt="Thumbnail Media Pembelajaran">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">MEDIA</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Media Presentasi Siklus 2 - Parameter Pemotongan</h3>
+                        <p class="artefak-card-desc">Rekaman instruksional berdurasi pendek yang mengilustrasikan teknik menyentuhkan cutter ke permukaan benda kerja.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="2" data-category="ASESMEN">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_asesmen.png" alt="Thumbnail Instrumen Asesmen">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">ASESMEN</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Instrumen Asesmen Siklus 2 - Parameter Pemotongan</h3>
+                        <p class="artefak-card-desc">Bank soal sumatif kognitif pilihan ganda untuk menguji pemahaman siswa tentang kecepatan pemamanan mesin frais.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="2" data-category="LAINNYA">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_lainnya.png" alt="Thumbnail Lainnya">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">LAINNYA</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Jurnal Refleksi Siklus 2</h3>
+                        <p class="artefak-card-desc">Dokumen refleksi diri yang mencatat kendala penyesuaian sumbu mesin frais dan cara mengatasinya pada pertemuan berikutnya.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <!-- === SIKLUS 3 ARTEFAK === -->
+                <div class="artefak-card" data-siklus="3" data-category="RPP">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_rpp.png" alt="Thumbnail RPP">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">RPP</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">RPP Siklus 3 - Membubut Eksentrik</h3>
+                        <p class="artefak-card-desc">RPP Siklus 3 mengenai teknik menggambar proyeksi gambar kerja komponen mesin menggunakan perangkat lunak CAD.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="3" data-category="BAHAN AJAR">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_bahan_ajar.png" alt="Thumbnail Bahan Ajar">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">BAHAN AJAR</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Materi Siklus 3 - Membubut Eksentrik</h3>
+                        <p class="artefak-card-desc">Modul ajar yang menjelaskan penerapan toleransi linier, suaian, dan simbol tanda pengerjaan permukaan standar ISO.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="3" data-category="LKM">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_lkm.png" alt="Thumbnail LKM">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">LKM</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">LKM Siklus 3 - Membubut Eksentrik</h3>
+                        <p class="artefak-card-desc">Lembar tugas menggambar detail komponen penumpu (bracket) lengkap dengan dimensi dan tampilan potongan.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="3" data-category="MEDIA">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_media.png" alt="Thumbnail Media Pembelajaran">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">MEDIA</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Media Pembelajaran Siklus 3 - Membubut Eksentrik</h3>
+                        <p class="artefak-card-desc">Video screencast cara cepat menggunakan fungsi offset, trim, chamfer, dan fillet dalam mempercepat proses drafting.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="3" data-category="ASESMEN">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_asesmen.png" alt="Thumbnail Instrumen Asesmen">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">ASESMEN</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Instrumen Asesmen Siklus 3 - Membubut Eksentrik</h3>
+                        <p class="artefak-card-desc">Format instrumen penilaian portofolio gambar CAD berdasarkan parameter ketelitian garis dan kesesuaian standar.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+                <div class="artefak-card" data-siklus="3" data-category="LAINNYA">
+                    <div class="artefak-card-thumb">
+                        <img src="thumbnails/thumb_lainnya.png" alt="Thumbnail Lainnya">
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">LAINNYA</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Video Praktik Mengajar CAD</h3>
+                        <p class="artefak-card-desc">Video dokumentasi pembelajaran CAD terbimbing di ruang laboratorium komputer sekolah mitra.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <button class="artefak-btn-analisis" onclick="openAnalisisModal(this)">Analisis</button>
+                        <a href="#" class="artefak-btn">Unduh / Lihat</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section Analisis -->
+        <section id="analisis" class="analisis-section" style="padding: 8rem 4rem; position: relative; background-color: var(--bg-color);">
+            <style>
+                .analisis-section {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .analisis-header-tag {
+                    font-family: var(--font-mono);
+                    font-size: 0.85rem;
+                    letter-spacing: 3px;
+                    color: rgba(245, 240, 232, 0.6);
+                    text-transform: uppercase;
+                    margin-bottom: 1rem;
+                    text-align: center;
+                }
+                .analisis-main-title {
+                    font-family: var(--font-hero);
+                    font-size: 4rem;
+                    color: var(--text-color);
+                    text-align: center;
+                    margin-bottom: 1.5rem;
+                }
+                .analisis-intro-text {
+                    font-family: var(--font-mono);
+                    font-size: 0.95rem;
+                    line-height: 1.8;
+                    color: rgba(245, 240, 232, 0.8);
+                    text-align: center;
+                    max-width: 1000px;
+                    margin: 0 auto 4rem auto;
+                }
+                .analisis-cards-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    width: 100%;
+                    max-width: 1400px;
+                    margin: 0 auto;
+                }
+                .acard {
+                    background: #151F2B; /* Dark slate */
+                    border-radius: 16px;
+                    padding: 2rem;
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    border: 1px solid rgba(255,255,255,0.05);
+                }
+                .acard:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+                }
+                .acard-top-box {
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 12px;
+                    padding: 1.5rem 1.2rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                    min-height: 110px;
+                }
+                .acard-num {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: var(--font-mono);
+                    font-weight: 700;
+                    font-size: 0.9rem;
+                    color: #151F2B;
+                    flex-shrink: 0;
+                }
+                .acard-title-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .acard-line {
+                    width: 30px;
+                    height: 2px;
+                    margin-bottom: 0.5rem;
+                }
+                .acard-title {
+                    font-family: var(--font-sub);
+                    font-size: 1.1rem;
+                    line-height: 1.3;
+                    font-weight: 600;
+                }
+                .acard-desc {
+                    font-family: var(--font-sub);
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                    color: rgba(245, 240, 232, 0.85);
+                    margin-bottom: 2.5rem;
+                    flex-grow: 1;
+                }
+                .acard-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    padding: 0.6rem 1.2rem;
+                    border-radius: 30px;
+                    background: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    color: rgba(245, 240, 232, 0.6);
+                    font-family: var(--font-mono);
+                    font-size: 0.7rem;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    width: fit-content;
+                }
+                .acard-btn:hover {
+                    background: rgba(255,255,255,0.1);
+                    color: #fff;
+                }
+
+                /* Theme Colors */
+                .theme-cyan .acard-top-box { border-color: rgba(0, 229, 255, 0.2); background: rgba(0, 229, 255, 0.03); }
+                .theme-cyan .acard-num { background: #00E5FF; }
+                .theme-cyan .acard-line { background: #00E5FF; }
+                .theme-cyan .acard-title { color: #00E5FF; }
+                .theme-cyan:hover { box-shadow: 0 15px 30px rgba(0, 229, 255, 0.1); border-color: rgba(0, 229, 255, 0.3); }
+
+                .theme-purple .acard-top-box { border-color: rgba(187, 134, 252, 0.2); background: rgba(187, 134, 252, 0.03); }
+                .theme-purple .acard-num { background: #BB86FC; }
+                .theme-purple .acard-line { background: #BB86FC; }
+                .theme-purple .acard-title { color: #BB86FC; }
+                .theme-purple:hover { box-shadow: 0 15px 30px rgba(187, 134, 252, 0.1); border-color: rgba(187, 134, 252, 0.3); }
+
+                .theme-teal .acard-top-box { border-color: rgba(3, 218, 197, 0.2); background: rgba(3, 218, 197, 0.03); }
+                .theme-teal .acard-num { background: #03DAC5; }
+                .theme-teal .acard-line { background: #03DAC5; }
+                .theme-teal .acard-title { color: #03DAC5; }
+                .theme-teal:hover { box-shadow: 0 15px 30px rgba(3, 218, 197, 0.1); border-color: rgba(3, 218, 197, 0.3); }
+
+                .theme-orange .acard-top-box { border-color: rgba(255, 171, 0, 0.2); background: rgba(255, 171, 0, 0.03); }
+                .theme-orange .acard-num { background: #FFAB00; }
+                .theme-orange .acard-line { background: #FFAB00; }
+                .theme-orange .acard-title { color: #FFAB00; }
+                .theme-orange:hover { box-shadow: 0 15px 30px rgba(255, 171, 0, 0.1); border-color: rgba(255, 171, 0, 0.3); }
+
+                @media (max-width: 1200px) {
+                    .analisis-cards-grid { grid-template-columns: repeat(2, 1fr); }
+                }
+                @media (max-width: 768px) {
+                    .analisis-cards-grid { grid-template-columns: 1fr; }
+                    .analisis-section { padding: 4rem 1.5rem; }
+                    .analisis-main-title { font-size: 2.5rem; }
+                }
+            </style>
+
+            <div class="analisis-header-tag fade-up">ANALISIS & EVALUASI</div>
+            <h2 class="analisis-main-title fade-up delay-1">Analisis Produk Pembelajaran</h2>
+            <p class="analisis-intro-text fade-up delay-2">Refleksi terhadap proses penyusunan, dasar pedagogis, faktor penerapan, dan penyesuaian produk pembelajaran untuk kebutuhan kelas yang berbeda.<br><br>Produk rencana dan perangkat pembelajaran pada Siklus 1, 2, dan 3 dirancang terintegrasi antara teori, praktik, dan kebutuhan industri vokasional (SMK).</p>
+
+            <div class="analisis-cards-grid">
+                
+                <!-- Card 1 -->
+                <div class="acard theme-cyan fade-up delay-1">
+                    <div class="acard-top-box">
+                        <div class="acard-num">01</div>
+                        <div class="acard-title-wrapper">
+                            <div class="acard-line"></div>
+                            <div class="acard-title">Kendala Penyusunan Produk</div>
+                        </div>
+                    </div>
+                    <div class="acard-desc">Penyusunan produk pembelajaran tidak hanya berhenti pada pembuatan materi, namun juga menyesuaikan dengan karakteristik kemampuan siswa dan ketersediaan mesin praktik...</div>
+                    <button class="acard-btn" onclick="openStaticModal('modal-analisis-1')">BUKA ANALISIS &gt;</button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="acard theme-purple fade-up delay-2">
+                    <div class="acard-top-box">
+                        <div class="acard-num">02</div>
+                        <div class="acard-title-wrapper">
+                            <div class="acard-line"></div>
+                            <div class="acard-title">Konsep Pedagogis yang Diadopsi</div>
+                        </div>
+                    </div>
+                    <div class="acard-desc">Produk pembelajaran disusun dengan dasar pedagogis yang menempatkan siswa sebagai pusat, mengutamakan Project Based Learning (PjBL) untuk simulasi nyata bengkel industri...</div>
+                    <button class="acard-btn" onclick="openStaticModal('modal-analisis-2')">BUKA ANALISIS &gt;</button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="acard theme-teal fade-up delay-3">
+                    <div class="acard-top-box">
+                        <div class="acard-num">03</div>
+                        <div class="acard-title-wrapper">
+                            <div class="acard-line"></div>
+                            <div class="acard-title">Faktor Keberhasilan Penerapan</div>
+                        </div>
+                    </div>
+                    <div class="acard-desc">Keberhasilan penerapan produk pembelajaran sangat dipengaruhi oleh sejauh mana kedisiplinan K3 diimplementasikan dan adanya umpan balik langsung yang otentik saat observasi...</div>
+                    <button class="acard-btn" onclick="openStaticModal('modal-analisis-3')">BUKA ANALISIS &gt;</button>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="acard theme-orange fade-up delay-4">
+                    <div class="acard-top-box">
+                        <div class="acard-num">04</div>
+                        <div class="acard-title-wrapper">
+                            <div class="acard-line"></div>
+                            <div class="acard-title">Penyesuaian untuk Kelas Berbeda</div>
+                        </div>
+                    </div>
+                    <div class="acard-desc">Produk pembelajaran perlu disiapkan agar dapat menyesuaikan kelas dengan kemampuan dasar berbeda menggunakan strategi scaffolding, rotasi kelompok, atau tantangan HOTS ekstra...</div>
+                    <button class="acard-btn" onclick="openStaticModal('modal-analisis-4')">BUKA ANALISIS &gt;</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Galeri Dokumentasi Section -->
+        <section id="galeri-dokumentasi" class="galeri-section">
+            <h2 class="section-header fade-up" style="text-align: center;">Galeri</h2>
+            <p class="galeri-subtitle fade-up delay-1">Dokumentasi Kegiatan Praktik Mengajar PPG</p>
+
+            <div class="galeri-grid fade-up delay-2">
+
+                <div class="galeri-item"
+                     data-caption-title="Praktik Mengajar Siklus 1"
+                     data-caption="Dokumentasi kegiatan pembelajaran — Penggunaan Dividing Head">
+                    <img src="IMG_20260427_080932_480.jpg" alt="Dokumentasi Praktik Mengajar Siklus 1">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Praktik Mengajar Siklus 1</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <div class="galeri-item"
+                     data-caption-title="Praktik Mengajar Siklus 2"
+                     data-caption="Dokumentasi kegiatan pembelajaran — Parameter Pemotongan">
+                    <img src="IMG_20260504_094055_377.jpg" alt="Dokumentasi Praktik Mengajar Siklus 2">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Praktik Mengajar Siklus 2</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <div class="galeri-item"
+                     data-caption-title="Suasana Kelas Praktikum"
+                     data-caption="Interaksi aktif guru dan murid di bengkel pemesinan">
+                    <img src="IMG_20260507_091752_468.jpg" alt="Suasana Kelas Praktikum">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Suasana Kelas Praktikum</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <div class="galeri-item"
+                     data-caption-title="Interaksi Guru &amp; Murid"
+                     data-caption="Sesi tanya jawab dan bimbingan langsung di ruang praktik">
+                    <img src="IMG_20260507_091912_416.jpg" alt="Interaksi Guru dan Murid">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Interaksi Guru &amp; Murid</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Lightbox Galeri">
+            <div class="lightbox-counter" id="lightbox-counter">1 / 4</div>
+            <button class="lightbox-close" id="lightbox-close" aria-label="Tutup">✕</button>
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Foto sebelumnya">&#8249;</button>
+            <div class="lightbox-img-wrap">
+                <img class="lightbox-img" id="lightbox-img" src="" alt="">
+            </div>
+            <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Foto berikutnya">&#8250;</button>
+            <div class="lightbox-caption-bar">
+                <div class="lightbox-caption-title" id="lightbox-caption-title"></div>
+                <div class="lightbox-caption-desc" id="lightbox-caption-desc"></div>
+            </div>
+        </div>
+
+        <!-- Video Praktik Pembelajaran Section -->
+        <section id="video-praktik" class="video-section">
+            <h2 class="section-header fade-up" style="text-align: center;">Video Praktik</h2>
+            <p class="galeri-subtitle fade-up delay-1">Praktik Pembelajaran PPG</p>
+
+            <div class="video-wrapper fade-up delay-2">
+                <div class="video-container">
+                    <!-- Ganti nilai src dengan link embed YouTube video praktik Anda -->
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Praktik Pembelajaran" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Penilaian Section -->
+        <section id="penilaian" class="projects" style="padding-top: 4rem;">
+            <h2 class="section-header fade-up" style="text-align: center;">Penilaian</h2>
+            <p class="galeri-subtitle fade-up delay-1" style="margin-bottom: 2rem;">Dokumen Lampiran</p>
+            
+            <div class="artefak-grid fade-up delay-2">
+                <!-- Lampiran 7 -->
+                <div class="artefak-card" style="margin: 0 auto; width: 100%;">
+                    <div class="penilaian-pdf-thumb">
+                        <iframe src="Penilaian/Lampiran 7.pdf" title="Preview Lampiran 7"></iframe>
+                        <div class="penilaian-pdf-overlay"></div>
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">LAMPIRAN 7</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Lampiran 7</h3>
+                        <p class="artefak-card-desc">Instrumen Penilaian Penyusunan Perangkat Pembelajaran.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <a href="Penilaian/Lampiran 7.pdf" class="artefak-btn" target="_blank">Buka PDF</a>
+                    </div>
+                </div>
+
+                <!-- Lampiran 8 -->
+                <div class="artefak-card" style="margin: 0 auto; width: 100%;">
+                    <div class="penilaian-pdf-thumb">
+                        <iframe src="Penilaian/Lampiran 8.pdf" title="Preview Lampiran 8"></iframe>
+                        <div class="penilaian-pdf-overlay"></div>
+                    </div>
+                    <div class="artefak-ribbon"></div>
+                    <span class="artefak-tag">LAMPIRAN 8</span>
+                    <div class="artefak-card-body">
+                        <h3 class="artefak-card-title">Lampiran 8</h3>
+                        <p class="artefak-card-desc">Instrumen Penilaian Pelaksanaan Pembelajaran.</p>
+                    </div>
+                    <div class="artefak-card-footer">
+                        <a href="Penilaian/Lampiran 8.pdf" class="artefak-btn" target="_blank">Buka PDF</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Guru Section -->
+        <section id="model-guru" class="model-guru-section">
+            <div class="model-guru-intro fade-up">
+                <h2 class="section-header" style="text-align: center;">Guru Masa Depan</h2>
+                <p style="color: var(--accent-color); font-family: var(--font-mono); font-size: 1.2rem; margin-bottom: 2rem; letter-spacing: 2px; text-transform: uppercase;">Menuju Pendidik Profesional</p>
+                <p>Halaman ini merupakan peta jalan (<em>roadmap</em>) dan komitmen nyata saya dalam mendedikasikan diri di dunia pendidikan. Sebagai guru lulusan PPG, saya memandang masa depan bukan sekadar tentang menjalankan tugas mengajar, melainkan tentang bagaimana memberikan dampak berkelanjutan di sekolah tempat saya mengabdi kelak.</p>
+            </div>
+
+            <!-- Misi Keguruan -->
+            <div id="misi" class="misi-container fade-up delay-1">
+                <h3 class="misi-title">🚀 Misi Keguruan</h3>
+                <p style="margin-bottom: 3rem; opacity: 0.8; font-style: italic;">Langkah nyata yang akan saya lakukan di sekolah tempat mengabdi kelak:</p>
+                
+                <ul class="misi-list">
+                    <li class="misi-item">
+                        <div class="misi-icon">🎯</div>
+                        <div class="misi-content">
+                            <h4>1. Pembelajaran Berpusat pada Murid (Student-Centered Learning)</h4>
+                            <p>Saya akan aktif merancang dan menerapkan modul ajar yang kreatif, interaktif, serta berbasis pembelajaran berdiferensiasi (<em>differentiated learning</em>) untuk mengakomodasi keberagaman gaya belajar dan potensi unik setiap siswa.</p>
+                        </div>
+                    </li>
+                    <li class="misi-item">
+                        <div class="misi-icon">💻</div>
+                        <div class="misi-content">
+                            <h4>2. Mengintegrasikan Teknologi secara Bijak</h4>
+                            <p>Memanfaatkan platform digital dan inovasi teknologi terkini sebagai media pembelajaran abad ke-21, guna menciptakan pengalaman belajar yang menyenangkan sekaligus relevan dengan kodrat zaman anak.</p>
+                        </div>
+                    </li>
+                    <li class="misi-item">
+                        <div class="misi-icon">🛡️</div>
+                        <div class="misi-content">
+                            <h4>3. Membangun Ekosistem Kelas yang Aman dan Inklusif</h4>
+                            <p>Menciptakan ruang kelas yang menjunjung tinggi toleransi, bebas dari perundungan (<em>bullying</em>), dan menghargai setiap pendapat, sehingga siswa merasa aman secara psikologis untuk mengeksplorasi potensi terbaiknya.</p>
+                        </div>
+                    </li>
+                    <li class="misi-item">
+                        <div class="misi-icon">🤝</div>
+                        <div class="misi-content">
+                            <h4>4. Mengembangkan Kolaborasi Berkelanjutan</h4>
+                            <p>Membuka ruang komunikasi dan sinergi yang positif dengan rekan sejawat, kepala sekolah, orang tua murid, serta komunitas praktisi demi kemajuan mutu sekolah tempat saya mengabdi.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Kompetensi & Karakter -->
+            <div id="kompetensi" class="kompetensi-container fade-up delay-2">
+                <h3 class="kompetensi-title" style="text-align: center;">🎯 Kompetensi & Karakter</h3>
+                <p style="text-align: center; margin-bottom: 4rem; opacity: 0.8; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Menjadi guru masa depan menuntut keseimbangan antara aspek keilmuan dan kematangan kepribadian. Berikut adalah strategi konkret saya dalam merawat dan meningkatkan kompetensi diri secara berkelanjutan:
+                </p>
+
+                <div class="kompetensi-grid">
+                    <!-- Pedagogik -->
+                    <div class="kompetensi-card">
+                        <div class="kompetensi-icon">📚</div>
+                        <h4>Pedagogik</h4>
+                        <div class="strategy">Refleksi & Inovasi</div>
+                        <p>Rutin mengevaluasi hasil pembelajaran di setiap akhir siklus, serta aktif mengikuti pelatihan perangkat ajar berbasis kurikulum terbaru agar strategi mengajar selalu relevan dengan kebutuhan murid.</p>
+                    </div>
+                    
+                    <!-- Profesional -->
+                    <div class="kompetensi-card">
+                        <div class="kompetensi-icon">🎓</div>
+                        <h4>Profesional</h4>
+                        <div class="strategy">Pembelajar Sepanjang Hayat</div>
+                        <p>Memperdalam penguasaan materi esensial secara teoretis maupun praktis melalui literatur ilmiah, jurnal pendidikan, serta aktif dalam forum Musyawarah Guru Mata Pelajaran (MGMP) atau KKG.</p>
+                    </div>
+
+                    <!-- Sosial -->
+                    <div class="kompetensi-card">
+                        <div class="kompetensi-icon">👥</div>
+                        <h4>Sosial</h4>
+                        <div class="strategy">Komunikasi Empatis</div>
+                        <p>Mengasah kepekaan sosial dan keterampilan berkomunikasi dua arah dengan seluruh warga sekolah, serta terlibat aktif dalam kegiatan sosial kemasyarakatan di lingkungan sekitar sekolah.</p>
+                    </div>
+
+                    <!-- Kepribadian -->
+                    <div class="kompetensi-card">
+                        <div class="kompetensi-icon">🌟</div>
+                        <h4>Kepribadian</h4>
+                        <div class="strategy">Keteladanan & Integritas</div>
+                        <p>Menampilkan pribadi yang religius, berakhlak mulia, berwibawa, jujur, dan disiplin tinggi. Berkomitmen menjadikan diri saya "role model" nyata (<em>ing ngarsa sung tuladha</em>) oleh peserta didik.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2 class="contact-cta fade-up">Ayo Buat Sesuatu Yang <span>Luar Biasa.</span></h2>
+            <div class="contact-links fade-up delay-1">
+                <a href="mailto:hello@ekasridarma.com" class="contact-link">EMAIL</a>
+                <a href="#" class="contact-link">LINKEDIN</a>
+                <a href="#" class="contact-link">GITHUB</a>
+            </div>
+        </section>
+
+        <!-- Premium Analisis Modal Popup -->
+        <div class="analisis-modal-overlay" id="analisis-modal" role="dialog" aria-modal="true" aria-label="Analisis Artefak">
+            <div class="analisis-modal">
+                <div class="analisis-modal-header">
+                    <div class="analisis-modal-title-area">
+                        <span class="analisis-modal-tag" id="analisis-tag">ANALISIS ARTEFAK</span>
+                        <h2 class="analisis-modal-title" id="analisis-title">Analisis RPP</h2>
+                    </div>
+                    <button class="analisis-modal-close" id="analisis-modal-close" onclick="closeAnalisisModal()" aria-label="Tutup">✕</button>
+                </div>
+                <div class="analisis-modal-body" id="analisis-body">
+                    <!-- Content injected dynamically via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mono-text">
+        <p>&copy; 2026 Eka Sri Darma. Dibuat dengan niat.</p>
+    </footer>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // 1. Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorCircle = document.querySelector('.cursor-circle');
+
+        // Only run on non-touch devices
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                // Animate circle with delay
+                cursorCircle.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 300, fill: "forwards" });
+            });
+
+            // Hover effect on interactable elements
+            const interactables = document.querySelectorAll('a, button, .project-card, .artefak-card, .skill-tag');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorCircle.style.width = '60px';
+                    cursorCircle.style.height = '60px';
+                    cursorCircle.style.backgroundColor = 'rgba(255, 184, 0, 0.1)';
+                    cursorCircle.style.borderColor = 'transparent';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorCircle.style.width = '40px';
+                    cursorCircle.style.height = '40px';
+                    cursorCircle.style.backgroundColor = 'transparent';
+                    cursorCircle.style.borderColor = '#F5F0E8';
+                });
+            });
+        }
+
+        // 2. Intersection Observer for Fade-up Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: stop observing once visible
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // 3. Navbar Scroll Effect & Scroll Spy
+        const navbar = document.querySelector('.navbar');
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links > a, .nav-links .nav-item > a.dropdown-toggle');
+
+        window.addEventListener('scroll', () => {
+            // Navbar bg
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Scroll Spy
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 4. Timeline Draw Effect
+        const timelineProgress = document.querySelector('.timeline-progress');
+        if (timelineProgress) {
+            window.addEventListener('scroll', () => {
+                const timeline = document.querySelector('.timeline');
+                const rect = timeline.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+
+                if (rect.top < viewHeight && rect.bottom > 0) {
+                    let scrollPercent = (viewHeight - rect.top) / (rect.height + viewHeight / 2);
+                    scrollPercent = Math.max(0, Math.min(1, scrollPercent));
+                    timelineProgress.style.height = `${scrollPercent * 100}%`;
+                }
+            });
+        }
+
+        // 5. Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        hamburger.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+
+            // Animate hamburger lines
+            const spans = hamburger.querySelectorAll('span');
+            if (mobileNav.classList.contains('open')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Close mobile menu when link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // 6. Mobile Dropdown Accordion
+        const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+        mobileDropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                const parentItem = toggle.parentElement;
+
+                // Close other open dropdowns (accordion effect)
+                document.querySelectorAll('.mobile-item.open').forEach(item => {
+                    if (item !== parentItem) {
+                        item.classList.remove('open');
+                    }
+                });
+
+                parentItem.classList.toggle('open');
+            });
+        });
+
+        // 7. Tab Navigation (Inspirasi Section)
+        const tabBtns = document.querySelectorAll('.subnav-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active classes
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+
+                // Add active to clicked
+                btn.classList.add('active');
+                const targetId = btn.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // 8. Artefak Section Cycle and Category Filtering
+        const artefakSiklusBtns = document.querySelectorAll('.siklus-tab-btn');
+        const artefakCategoryPills = document.querySelectorAll('.filter-pill-btn');
+        const artefakCards = document.querySelectorAll('.artefak-card');
+        const artefakActiveCount = document.getElementById('artefak-active-count');
+        const artefakBreadcrumb = document.getElementById('artefak-breadcrumb');
+
+        let currentSiklus = 'all';
+        let currentCategory = 'all';
+
+        function updateArtefakFilters() {
+            let visibleCount = 0;
+
+            artefakCards.forEach(card => {
+                const cardSiklus = card.getAttribute('data-siklus');
+                const cardCategory = card.getAttribute('data-category');
+
+                const matchesSiklus = (currentSiklus === 'all' || cardSiklus === currentSiklus);
+                const matchesCategory = (currentCategory === 'all' || cardCategory === currentCategory);
+
+                if (matchesSiklus && matchesCategory) {
+                    card.style.display = 'flex';
+                    // Force a layout reflow before opacity change to trigger transition
+                    void card.offsetWidth;
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0) scale(1)';
+                    visibleCount++;
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(15px) scale(0.96)';
+                    // Hide completely after transition completes
+                    setTimeout(() => {
+                        if (card.style.opacity === '0') {
+                            card.style.display = 'none';
+                        }
+                    }, 250);
+                }
+            });
+
+            // Update visible artifact count
+            artefakActiveCount.textContent = `${visibleCount} artefak tampil`;
+
+            // Update breadcrumb
+            const cycleText = currentSiklus === 'all' ? 'SEMUA SIKLUS' : `SIKLUS ${currentSiklus}`;
+            const categoryText = currentCategory === 'all' ? 'SEMUA' : currentCategory.toUpperCase();
+            artefakBreadcrumb.textContent = `PUBLIC / ARTEFAK / ${cycleText} / ${categoryText}`;
+        }
+
+        // Add event listeners to Cycle Buttons
+        artefakSiklusBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                artefakSiklusBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSiklus = btn.getAttribute('data-siklus');
+                updateArtefakFilters();
+            });
+        });
+
+        // Add event listeners to Category Pills
+        artefakCategoryPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                artefakCategoryPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                currentCategory = pill.getAttribute('data-category');
+                updateArtefakFilters();
+            });
+        });
+
+        // Initial run
+        updateArtefakFilters();
+
+        // 9. Nav Filter Links — apply category/siklus filter when a nav link with data-filter-* is clicked
+        document.querySelectorAll('.nav-filter-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const targetCategory = link.getAttribute('data-filter-category');
+                const targetSiklus   = link.getAttribute('data-filter-siklus');
+
+                // Update active states on siklus capsule buttons
+                if (targetSiklus !== null) {
+                    artefakSiklusBtns.forEach(b => b.classList.remove('active'));
+                    const matchingBtn = [...artefakSiklusBtns].find(b => b.getAttribute('data-siklus') === targetSiklus);
+                    if (matchingBtn) { matchingBtn.classList.add('active'); }
+                    currentSiklus = targetSiklus;
+                }
+
+                // Update active states on category pill buttons
+                if (targetCategory !== null) {
+                    artefakCategoryPills.forEach(p => p.classList.remove('active'));
+                    const matchingPill = [...artefakCategoryPills].find(p => p.getAttribute('data-category') === targetCategory);
+                    if (matchingPill) { matchingPill.classList.add('active'); }
+                    currentCategory = targetCategory;
+                }
+
+                updateArtefakFilters();
+            });
+        });
+
+        // 10. Galeri Dokumentasi — Lightbox
+        const galeriItems    = document.querySelectorAll('.galeri-item');
+        const lightboxEl     = document.getElementById('lightbox');
+        const lightboxImg    = document.getElementById('lightbox-img');
+        const lightboxTitle  = document.getElementById('lightbox-caption-title');
+        const lightboxDesc   = document.getElementById('lightbox-caption-desc');
+        const lightboxCnt    = document.getElementById('lightbox-counter');
+        const lightboxClose  = document.getElementById('lightbox-close');
+        const lightboxPrev   = document.getElementById('lightbox-prev');
+        const lightboxNext   = document.getElementById('lightbox-next');
+
+        let currentLightboxIndex = 0;
+
+        const galeriData = [...galeriItems].map(item => ({
+            src:   item.querySelector('img').src,
+            alt:   item.querySelector('img').alt,
+            title: item.getAttribute('data-caption-title'),
+            desc:  item.getAttribute('data-caption'),
+        }));
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            updateLightbox();
+            lightboxEl.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightboxEl.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            const d = galeriData[currentLightboxIndex];
+            lightboxImg.src              = d.src;
+            lightboxImg.alt              = d.alt;
+            lightboxTitle.innerHTML      = d.title;
+            lightboxDesc.textContent     = d.desc;
+            lightboxCnt.textContent      = `${currentLightboxIndex + 1} / ${galeriData.length}`;
+        }
+
+        galeriItems.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        lightboxPrev.addEventListener('click', () => {
+            currentLightboxIndex = (currentLightboxIndex - 1 + galeriData.length) % galeriData.length;
+            updateLightbox();
+        });
+
+        lightboxNext.addEventListener('click', () => {
+            currentLightboxIndex = (currentLightboxIndex + 1) % galeriData.length;
+            updateLightbox();
+        });
+
+        // Close lightbox when clicking the backdrop
+        lightboxEl.addEventListener('click', (e) => {
+            if (e.target === lightboxEl) closeLightbox();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightboxEl.classList.contains('active')) return;
+            if (e.key === 'Escape')      closeLightbox();
+            if (e.key === 'ArrowLeft')  { currentLightboxIndex = (currentLightboxIndex - 1 + galeriData.length) % galeriData.length; updateLightbox(); }
+            if (e.key === 'ArrowRight') { currentLightboxIndex = (currentLightboxIndex + 1) % galeriData.length; updateLightbox(); }
+        });
+
+        // ===== ANALISIS MODAL SYSTEM =====
+        const analisisModal = document.getElementById('analisis-modal');
+        const analisisTitle = document.getElementById('analisis-title');
+        const analisisTag   = document.getElementById('analisis-tag');
+        const analisisBody  = document.getElementById('analisis-body');
+
+        // Detailed custom content for RPP Siklus 2
+        const ANALISIS_DATABASE = {
+            '2_RPP': `
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>📘</span> 1. Konteks Pembelajaran</h3>
+                    <p class="analisis-text">RPP ini disusun untuk peserta didik SMK Kompetensi Keahlian Teknik Pemesinan fase F kelas XI pada materi Parameter Pemotongan Mesin Bubut dan Frais. Materi ini merupakan kompetensi dasar yang sangat penting karena berkaitan langsung dengan keterampilan praktik pemesinan di dunia industri.</p>
+                    <p class="analisis-text">Karakteristik peserta didik SMK cenderung lebih mudah memahami pembelajaran melalui pengalaman langsung (learning by doing). Oleh karena itu, pembelajaran dirancang dengan proporsi praktik yang lebih dominan dibanding teori, yaitu 7 JP praktik dan 2 JP teori dalam setiap pertemuan.</p>
+                    <p class="analisis-text">Konteks pembelajaran juga disesuaikan dengan kondisi bengkel pemesinan di sekolah dan kebutuhan dunia kerja industri manufaktur yang menuntut ketelitian, keselamatan kerja, kemampuan berpikir kritis, dan kemampuan memecahkan masalah saat proses machining berlangsung.</p>
+                    <p class="analisis-text">RPP ini menerapkan pendekatan pembelajaran mendalam (deep learning) karena tidak hanya menekankan hafalan rumus parameter pemotongan, tetapi juga kemampuan siswa dalam memahami hubungan parameter terhadap kualitas hasil pemesinan, efisiensi kerja, dan keselamatan proses produksi.</p>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>🎯</span> 2. Tujuan Pengembangan RPP</h3>
+                    <p class="analisis-text">Tujuan utama penyusunan RPP ini adalah:</p>
+                    <ul class="analisis-list">
+                        <li>Membantu peserta didik memahami konsep parameter pemotongan secara mendalam.</li>
+                        <li>Mengembangkan keterampilan praktik pemesinan bubut dan frais sesuai standar industri.</li>
+                        <li>Menumbuhkan kemampuan problem solving melalui analisis hasil praktik.</li>
+                        <li>Mengembangkan keterampilan abad 21: critical thinking, collaboration, communication, dan creativity.</li>
+                        <li>Menanamkan budaya kerja industri dan K3.</li>
+                    </ul>
+                    <p class="analisis-text">Selain itu, RPP ini juga bertujuan mengintegrasikan teori yang dipelajari dalam mata kuliah PPG dengan praktik nyata di sekolah selama PPL Terbimbing.</p>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>🔍</span> 3. Analisis Pendekatan Pembelajaran</h3>
+                    
+                    <div class="analisis-sub-sec">
+                        <h4 class="analisis-sub-title">A. Pendekatan Deep Learning</h4>
+                        <p class="analisis-text">Pendekatan deep learning dalam RPP ini terlihat pada pembelajaran berbasis pengalaman nyata, keterlibatan aktif peserta didik, refleksi proses belajar, analisis kesalahan praktik, dan transfer pengetahuan ke situasi nyata industri.</p>
+                        <p class="analisis-text">Peserta didik tidak hanya menghitung parameter pemotongan, tetapi juga mengamati dampaknya terhadap kualitas permukaan, umur pahat, getaran mesin, dan efisiensi proses. Hal ini sesuai dengan teori pembelajaran konstruktivisme yang menyatakan bahwa pengetahuan dibangun melalui pengalaman belajar aktif.</p>
+                        <p class="analisis-text">Menurut teori konstruktivisme dari Jean Piaget, peserta didik membangun pemahaman melalui proses asimilasi dan akomodasi berdasarkan pengalaman nyata. Dalam praktik pemesinan, siswa memperoleh pemahaman ketika mereka mencoba langsung parameter berbeda dan membandingkan hasilnya.</p>
+                    </div>
+
+                    <div class="analisis-sub-sec">
+                        <h4 class="analisis-sub-title">B. Model Project Based Learning (PjBL)</h4>
+                        <p class="analisis-text">RPP menggunakan model Project Based Learning karena peserta didik menghasilkan produk nyata berupa benda kerja hasil pembubutan dan pengefraisan.</p>
+                        <p class="analisis-text">Tahapan PjBL dalam RPP meliputi: Penentuan masalah, Perencanaan proyek, Penyusunan jadwal, Pelaksanaan praktik, Evaluasi hasil, dan Refleksi pengalaman. Model ini sesuai dengan karakteristik pembelajaran vokasional karena pembelajaran menjadi lebih kontekstual dan autentik. Menurut John Dewey, pembelajaran akan lebih bermakna apabila peserta didik belajar melalui pengalaman langsung dan penyelesaian masalah nyata.</p>
+                    </div>
+
+                    <div class="analisis-sub-sec">
+                        <h4 class="analisis-sub-title">C. Integrasi UbD (Understanding by Design)</h4>
+                        <p class="analisis-text">Prinsip UbD diterapkan melalui tiga tahap: Menentukan tujuan pembelajaran, Menentukan bukti asesmen, dan Merancang pengalaman belajar. Pendekatan ini membantu guru merancang pembelajaran yang fokus pada pemahaman mendalam, bukan hanya penyelesaian materi.</p>
+                        <p class="analisis-text">Dalam praktiknya, siswa diarahkan untuk memahami mengapa parameter tertentu digunakan, bagaimana pengaruh parameter, dan kapan parameter harus diubah.</p>
+                    </div>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>🚀</span> 4. Kelebihan RPP</h3>
+                    <div class="analisis-box kelebihan">
+                        <strong>A. Berpusat pada Peserta Didik:</strong> Peserta didik aktif melakukan eksplorasi, praktik, diskusi, dan refleksi.<br>
+                        <strong>B. Kontekstual dengan Dunia Industri:</strong> Materi langsung berkaitan dengan proses kerja nyata di bengkel dan industri manufaktur.<br>
+                        <strong>C. Mengembangkan Higher Order Thinking Skills (HOTS):</strong> Peserta didik menganalisis kesalahan praktik dan menentukan solusi.<br>
+                        <strong>D. Integrasi Pengetahuan dan Keterampilan:</strong> Pembelajaran tidak hanya teori tetapi langsung diaplikasikan.<br>
+                        <strong>E. Mendukung Pembelajaran Berdiferensiasi:</strong> Guru dapat memberikan scaffolding kepada siswa yang mengalami kesulitan.
+                    </div>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>⚠️</span> 5. Kekurangan RPP</h3>
+                    <div class="analisis-box kekurangan">
+                        <strong>A. Membutuhkan Waktu yang Panjang:</strong> Pembelajaran praktik membutuhkan alokasi waktu besar.<br>
+                        <strong>B. Ketergantungan pada Fasilitas Bengkel:</strong> Keberhasilan pembelajaran dipengaruhi oleh jumlah mesin, kondisi alat, dan ketersediaan bahan.<br>
+                        <strong>C. Membutuhkan Pengawasan Intensif:</strong> Guru harus aktif mengawasi praktik karena berkaitan dengan keselamatan kerja (K3).<br>
+                        <strong>D. Perbedaan Kemampuan Siswa:</strong> Kemampuan numerik dan keterampilan praktik siswa berbeda-beda sehingga guru perlu menerapkan diferensiasi.
+                    </div>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>📚</span> 6. Kajian Teori PPG yang Terintegrasi</h3>
+                    <p class="analisis-text">RPP ini mengintegrasikan beberapa teori dan mata kuliah dalam PPG sebagai landasan teoretis pelaksanaan PPL:</p>
+                    <table class="analisis-table">
+                        <thead>
+                            <tr>
+                                <th>Mata Kuliah PPG</th>
+                                <th>Implementasi dalam RPP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pembelajaran Mendalam</strong></td>
+                                <td>Refleksi, pemecahan masalah, dan stimulasi HOTS dalam proses pengerjaan benda kerja.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Strategi Pembelajaran</strong></td>
+                                <td>Penerapan Project Based Learning (PjBL) yang berpusat pada siswa (student-centered learning).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Asesmen Pembelajaran</strong></td>
+                                <td>Penerapan asesmen diagnostik awal, formatif saat proses praktik, serta sumatif hasil akhir.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Psikologi Pendidikan</strong></td>
+                                <td>Pemberian bimbingan (scaffolding) and pembelajaran berbasis konstruktivisme (Jean Piaget).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Media Pembelajaran</strong></td>
+                                <td>Pemanfaatan media video animasi interaktif dan media demonstrasi fisik alat potong.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kurikulum</strong></td>
+                                <td>Penyelarasan CP (Capaian Pembelajaran), perumusan TP, serta rancangan modul ajar terstandar.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>✨</span> 7. Kesimpulan</h3>
+                    <p class="analisis-text">RPP Pembelajaran Mendalam pada materi Parameter Pemotongan Mesin Bubut dan Frais dirancang untuk menciptakan pembelajaran vokasional yang kontekstual, aktif, dan bermakna. Pembelajaran tidak hanya menekankan aspek teori, tetapi juga penguasaan keterampilan praktik, kemampuan berpikir kritis, kolaborasi, dan refleksi pengalaman belajar.</p>
+                    <p class="analisis-text">Pendekatan Deep Learning yang dipadukan dengan Project Based Learning dinilai sesuai untuk pembelajaran di SMK karena mampu mendekatkan pengalaman belajar dengan kondisi nyata dunia kerja industri.</p>
+                </div>
+            `
+        };
+
+        // Highly professional, tailored content generator for the other 17 combinations
+        function generateAnalisisContent(siklus, category, title) {
+            let topic = "";
+            let contextDesc = "";
+            let tujuanDesc = "";
+            let kelebihanList = [];
+            let kekuranganList = [];
+            let ppgIntegration = [];
+
+            if (siklus === "1") {
+                topic = "Milling Machine & Penggunaan Dividing Head (Kepala Pembagi)";
+            } else if (siklus === "2") {
+                topic = "Parameter Pemotongan Mesin Bubut dan Frais";
+            } else if (siklus === "3") {
+                topic = "Membubut Eksentrik & Pembuatan Gambar CAD";
+            }
+
+            // Content structure dynamically tailored based on Category
+            if (category === "RPP") {
+                contextDesc = `Penyusunan Rencana Pelaksanaan Pembelajaran (RPP) pada materi ${topic} untuk Fase F kelas XI Teknik Pemesinan ini disesuaikan dengan kurikulum vokasional yang mengutamakan hands-on experience. Model yang diintegrasikan adalah student-centered learning dengan pendekatan PjBL agar siswa memahami urgensi K3, ketepatan perhitungan teknis, dan perbaikan mandiri saat penyelesaian benda kerja.`;
+                tujuanDesc = `RPP dikembangkan sebagai cetak biru kegiatan pembelajaran agar proses transfer keterampilan (transfer of learning) berjalan sistematis. Tujuannya adalah memfasilitasi pencapaian Capaian Pembelajaran secara optimal, mengintegrasikan kerangka berpikir kritis abad 21, serta menanamkan budaya kerja industri (5S) secara konsisten di area bengkel.`;
+                kelebihanList = [
+                    "<strong>Sistematis & Terstruktur:</strong> Menyediakan peta jalan yang jelas bagi guru dan siswa.",
+                    "<strong>Integrasi HOTS & K3:</strong> Menjamin siswa tidak sekadar memutar tuas, tetapi mengerti prosedur keselamatan dan logika mekanisnya.",
+                    "<strong>Pembelajaran Diferensiasi:</strong> Memuat opsi pendampingan intensif bagi siswa dengan kecepatan belajar lambat."
+                ];
+                kekuranganList = [
+                    "<strong>Alokasi Waktu Kaku:</strong> Praktik pemesinan seringkali melebihi durasi jam pelajaran standar.",
+                    "<strong>Ketergantungan Fasilitas:</strong> RPP mengasumsikan mesin dan alat potong siap pakai dalam jumlah memadai."
+                ];
+                ppgIntegration = [
+                    { matkul: "Pembelajaran Mendalam", impl: "Merancang aktivitas refleksi kritis setelah penyusunan benda kerja selesai." },
+                    { matkul: "Strategi Pembelajaran", impl: "Penerapan model pembelajaran berbasis proyek (PjBL) secara berkelompok." },
+                    { matkul: "Asesmen Pembelajaran", impl: "Penyusunan instrumen asesmen keterampilan (job sheet rubrik)." }
+                ];
+            } else if (category === "BAHAN AJAR") {
+                contextDesc = `Bahan ajar mengenai ${topic} ini berfungsi sebagai landasan teoretis esensial. Bagi siswa vokasional, teori pemesinan tidak boleh abstrak. Oleh karena itu, bahan ajar ini memuat ilustrasi visual 2D/3D yang jelas, formula perhitungan praktis, serta tabel referensi standar industri (seperti tabel kecepatan potong bahan baja/aluminium).`;
+                tujuanDesc = `Membantu siswa menjembatani jarak antara konsep abstrak matematika pemesinan dengan tindakan nyata di mesin. Bahan ajar ini dikembangkan untuk menjadi panduan mandiri siswa agar mengurangi ketergantungan konstan pada instruktur dan melatih literasi teknis standar industri.`;
+                kelebihanList = [
+                    "<strong>Visualisasi Tajam:</strong> Disertai gambar detail bagian-bagian mesin dan alat potong yang mempermudah pemahaman.",
+                    "<strong>Rumus Praktis:</strong> Memudahkan siswa melakukan perhitungan parameter kerja secara mandiri di lapangan.",
+                    "<strong>Standardisasi Industri:</strong> Menggunakan rujukan kecepatan potong standar untuk keselamatan alat dan benda."
+                ];
+                kekuranganList = [
+                    "<strong>Bersifat Statis:</strong> Tidak dapat menggantikan kepekaan kinestetik yang hanya diperoleh dengan menyentuh mesin langsung.",
+                    "<strong>Memerlukan Kemampuan Numerik:</strong> Siswa yang memiliki kesulitan matematika memerlukan bimbingan ekstra untuk memahami rumus."
+                ];
+                ppgIntegration = [
+                    { matkul: "Media & Bahan Ajar", impl: "Pengembangan e-modul interaktif dengan ilustrasi visual berkualitas tinggi." },
+                    { matkul: "Pembelajaran Mendalam", impl: "Menyusun peta konsep terintegrasi untuk melatih pemahaman struktural." },
+                    { matkul: "Kurikulum", impl: "Menyelaraskan konten bahan ajar dengan kebutuhan industri manufaktur saat ini." }
+                ];
+            } else if (category === "LKM") {
+                contextDesc = `Lembar Kerja Murid (LKM) atau Job Sheet untuk praktikum ${topic} ini dirancang sebagai panduan operasional langkah-demi-langkah (SOP). Siswa vokasional belajar secara efektif ketika langkah pengerjaan diuraikan secara detail dengan disertai instruksi K3 pada setiap tahap kritis untuk menghindari kecelakaan kerja.`;
+                tujuanDesc = `Membimbing siswa menyelesaikan benda kerja sesuai spesifikasi gambar teknik dengan toleransi yang ditentukan. LKM ini juga bertujuan membangun disiplin kerja, membiasakan siswa membaca SOP kerja secara mandiri, serta mencatat hasil pengukuran secara jujur sebagai bagian dari asesmen proses.`;
+                kelebihanList = [
+                    "<strong>Panduan SOP Jelas:</strong> Menuntun siswa langkah demi langkah sehingga memperkecil risiko kesalahan fatal.",
+                    "<strong>Aspek Refleksi & Mandiri:</strong> Menyediakan kolom isian hasil pengukuran mandiri sebelum diverifikasi guru.",
+                    "<strong>Fokus pada K3:</strong> Peringatan keselamatan ditempatkan secara visual pada setiap langkah rawan."
+                ];
+                kekuranganList = [
+                    "<strong>Kreativitas Terbatas:</strong> Siswa cenderung mengikuti instruksi secara mekanis tanpa memahami esensi logis di baliknya.",
+                    "<strong>Rentan Rusak di Bengkel:</strong> Cetakan LKM fisik mudah kotor terkena oli dan cairan pendingin mesin."
+                ];
+                ppgIntegration = [
+                    { matkul: "Asesmen Pembelajaran", impl: "Menyediakan lembar checklist penilaian diri (self-assessment) hasil kerja." },
+                    { matkul: "Strategi Pembelajaran", impl: "Mendesain skenario pemecahan masalah (troubleshooting) saat pahat tumpul atau ukuran meleset." },
+                    { matkul: "Psikologi Pendidikan", impl: "Scaffolding bertahap melalui instruksi kerja dari yang mudah ke yang kompleks." }
+                ];
+            } else if (category === "MEDIA") {
+                contextDesc = `Media Pembelajaran interaktif (seperti video demonstrasi setting mesin atau animasi 3D lintasan pahat) dikembangkan untuk mempermudah pemahaman konsep spasial yang dinamis pada materi ${topic}. Media visual sangat efektif menghemat waktu demonstrasi langsung di bengkel.`;
+                tujuanDesc = `Memvisualisasikan proses pemotongan mikro yang tidak terlihat langsung oleh mata, seperti pembentukan beram (chip), titik sentuh cutter, dan putaran mesin. Ini membantu siswa membangun model mental yang akurat sebelum melakukan operasional fisik yang berisiko tinggi.`;
+                kelebihanList = [
+                    "<strong>Visualisasi Spasial Kuat:</strong> Memperjelas bagian-bagian mesin yang bergerak lambat maupun cepat secara aman.",
+                    "<strong>Dapat Diakses Berulang:</strong> Siswa dapat memutar ulang video penjelasan di luar jam sekolah jika belum paham.",
+                    "<strong>Meningkatkan Keterlibatan:</strong> Menarik perhatian siswa dibanding penjelasan teoretis yang monoton."
+                ];
+                kekuranganList = [
+                    "<strong>Akses IT Terbatas:</strong> Memerlukan koneksi internet atau perangkat digital yang memadai di area bengkel.",
+                    "<strong>Kurang Umpan Balik Fisik:</strong> Animasi visual tidak dapat menggantikan sensasi taktil getaran dan suara pemesinan nyata."
+                ];
+                ppgIntegration = [
+                    { matkul: "Media Pembelajaran", impl: "Memproduksi video screencast pengoperasian CAD dan video demonstrasi setting alat potong." },
+                    { matkul: "Pembelajaran Mendalam", impl: "Melibatkan multisensori siswa (audio-visual) untuk retensi memori jangka panjang." },
+                    { matkul: "Psikologi Pendidikan", impl: "Memanfaatkan teori kognitif multimedia untuk efisiensi beban kerja kognitif siswa." }
+                ];
+            } else if (category === "ASESMEN") {
+                contextDesc = `Instrumen asesmen yang komprehensif (asesmen diagnostik, rubrik penilaian keterampilan proses praktikum, dan tes formatif kognitif) dirancang untuk mengukur secara objektif pemahaman teori dan kompetensi praktik pada materi ${topic}.`;
+                tujuanDesc = `Memberikan umpan balik yang akurat bagi siswa mengenai tingkat akurasi dan ketelitian hasil kerja mereka. Selain itu, instrumen ini bertujuan menilai ranah afektif seperti kedisiplinan APD, kebersihan mesin, dan sikap kerja profesional (soft skills industri).`;
+                kelebihanList = [
+                    "<strong>Rubrik Objektif & Jelas:</strong> Menghilangkan subjektivitas penilaian guru menggunakan standar deviasi ukuran.",
+                    "<strong>Asesmen Holistik:</strong> Menilai tiga ranah sekaligus: Kognitif (teori parameter), Psikomotor (benda kerja), dan Afektif (K3 & 5S).",
+                    "<strong>Umpan Balik Segera:</strong> Menggunakan check sheet ukuran presisi sehingga siswa langsung tahu letak kesalahannya."
+                ];
+                kekuranganList = [
+                    "<strong>Beban Administrasi Tinggi:</strong> Guru memerlukan waktu lebih lama untuk mengukur presisi benda kerja satu per satu.",
+                    "<strong>Tingkat Stres Siswa:</strong> Evaluasi ketat di depan mesin dapat memicu kecemasan dan mengganggu fokus praktik."
+                ];
+                ppgIntegration = [
+                    { matkul: "Asesmen Pembelajaran", impl: "Merancang rubrik penilaian psikomotorik berbasis lembar kerja industri (job sheet)." },
+                    { matkul: "Kurikulum", impl: "Menyelaraskan kriteria kelulusan praktikum dengan standar kompetensi minimum industri." },
+                    { matkul: "Pembelajaran Mendalam", impl: "Menggunakan portofolio hasil refleksi berkala sebagai instrumen evaluasi formatif berkelanjutan." }
+                ];
+            } else {
+                contextDesc = `Artefak pendukung (seperti Jurnal Refleksi, Video Praktik Mengajar Terbimbing, atau Video Apersepsi K3) disusun untuk melengkapi siklus pembelajaran ${topic}. Dokumen ini berfokus pada refleksi guru dan siswa untuk menemukan solusi atas kendala nyata di bengkel.`;
+                tujuanDesc = `Mengevaluasi efektivitas metode pembelajaran yang diterapkan, mengidentifikasi akar penyebab kegagalan dimensi produk siswa, serta mendokumentasikan iklim belajar mengajar di ruang kelas vokasional untuk keperluan perbaikan kualitas berkelanjutan (PTK).`;
+                kelebihanList = [
+                    "<strong>Refleksi Mendalam:</strong> Membantu guru dan siswa mengidentifikasi hambatan belajar secara jujur.",
+                    "<strong>Dokumentasi Otentik:</strong> Rekaman video praktik menjadi bukti nyata performa mengajar dan perilaku belajar siswa.",
+                    "<strong>Solutif:</strong> Menghasilkan rekomendasi tindakan konkret untuk diterapkan pada pertemuan berikutnya."
+                ];
+                kekuranganList = [
+                    "<strong>Membutuhkan Kejujuran Diri:</strong> Analisis reflektif tidak akan berguna jika dilakukan sekadar formalitas pengisian.",
+                    "<strong>Keterbatasan Perekaman:</strong> Pengambilan video di bengkel bising membutuhkan mikrofon eksternal khusus agar suara terdengar jelas."
+                ];
+                ppgIntegration = [
+                    { matkul: "Pembelajaran Mendalam", impl: "Melakukan refleksi berbasis model ALACT untuk perbaikan kualitas mengajar guru." },
+                    { matkul: "Psikologi Pendidikan", impl: "Menganalisis dinamika interaksi sosial di dalam kelas dan bengkel pemesinan." },
+                    { matkul: "Media Pembelajaran", impl: "Pemanfaatan rekaman video untuk mereview keselarasan gerak kinestetik siswa saat mengoperasikan mesin." }
+                ];
+            }
+
+            return `
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>📘</span> 1. Konteks Pembelajaran</h3>
+                    <p class="analisis-text">${contextDesc}</p>
+                    <p class="analisis-text">Karakteristik mata pelajaran teknik pemesinan menuntut rasio praktik yang tinggi (learning by doing). Siswa Fase F (kelas XI) berada pada fase perkembangan kinestetik operasional, di mana mereka mengasimilasi konsep teoretis (kecepatan potong, sudut potong pahat, rasio indexing) setelah melihat akibat langsungnya pada permukaan logam benda kerja. Oleh karena itu, artefak ini diselaraskan dengan kondisi riil peralatan bengkel dan tuntutan ketelitian kerja industri manufaktur.</p>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>🎯</span> 2. Tujuan Penggunaan Model</h3>
+                    <p class="analisis-text">${tujuanDesc}</p>
+                    <p class="analisis-text">Implementasi model Project Based Learning (PjBL) atau pembelajaran mendalam (deep learning) bertujuan utama untuk melatih kemampuan problem solving (kemampuan berpikir kritis saat proses machining bermasalah) serta membiasakan siswa berkomunikasi aktif dalam kerja tim berkelompok (collaboration & communication) layaknya di area divisi produksi industri manufaktur.</p>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>🚀</span> 3. Kelebihan dan Kekurangan</h3>
+                    
+                    <div class="analisis-sub-sec">
+                        <h4 class="analisis-sub-title">Kelebihan Artefak</h4>
+                        <div class="analisis-box kelebihan">
+                            ${kelebihanList.map(item => `• ${item}<br>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="analisis-sub-sec">
+                        <h4 class="analisis-sub-title">Kekurangan & Tantangan</h4>
+                        <div class="analisis-box kekurangan">
+                            ${kekuranganList.map(item => `• ${item}<br>`).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>📚</span> 4. Kajian Teori PPG yang Terintegrasi</h3>
+                    <p class="analisis-text">Artefak ini dirancang dengan mengintegrasikan beberapa landasan teoretis dari mata kuliah PPG yang selaras dengan praktik lapangan PPL Terbimbing:</p>
+                    <table class="analisis-table">
+                        <thead>
+                            <tr>
+                                <th>Mata Kuliah PPG</th>
+                                <th>Implementasi & Kajian Teori Terintegrasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${ppgIntegration.map(p => `
+                                <tr>
+                                    <td><strong>${p.matkul}</strong></td>
+                                    <td>${p.impl}</td>
+                                </tr>
+                            `).join('')}
+                            <tr>
+                                <td><strong>Psikologi Pendidikan</strong></td>
+                                <td>Menggunakan teori konstruktivisme Jean Piaget dan zona perkembangan proksimal (ZPD) Vygotsky untuk scaffold praktik siswa.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kurikulum Vokasional</strong></td>
+                                <td>Penyelarasan job sheet praktik dengan peta kompetensi kejuruan dan standar kerja industri.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="analisis-sec">
+                    <h3 class="analisis-sec-title"><span>✨</span> Kesimpulan Refleksi</h3>
+                    <p class="analisis-text">Pengembangan artefak ini terbukti krusial dalam mendukung keberhasilan pembelajaran praktik pemesinan yang aman, presisi, dan terstruktur. Melalui analisis berkelanjutan dan umpan balik yang terukur, kualitas proses pembelajaran teknik pemesinan dapat terus ditingkatkan agar lulusan SMK memiliki bekal kompetensi yang matang dan berdaya saing tinggi di dunia kerja industri global.</p>
+                </div>
+            `;
+        }
+
+        function openAnalisisModal(button) {
+            const card = button.closest('.artefak-card');
+            const siklus = card.getAttribute('data-siklus');
+            const category = card.getAttribute('data-category');
+            const cardTitle = card.querySelector('.artefak-card-title').textContent;
+
+            // Set Title & Tag
+            analisisTitle.textContent = cardTitle;
+            analisisTag.textContent = `ANALISIS ARTEFAK / SIKLUS ${siklus} / ${category}`;
+
+            // Get Content
+            const key = `${siklus}_${category}`;
+            let contentHTML = "";
+            if (ANALISIS_DATABASE[key]) {
+                contentHTML = ANALISIS_DATABASE[key];
+            } else {
+                contentHTML = generateAnalisisContent(siklus, category, cardTitle);
+            }
+
+            // Inject and Open
+            analisisBody.innerHTML = contentHTML;
+            analisisModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Scroll modal body to top
+            analisisBody.scrollTop = 0;
+        }
+
+        function closeAnalisisModal() {
+            analisisModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on backdrop click
+        analisisModal.addEventListener('click', (e) => {
+            if (e.target === analisisModal) {
+                closeAnalisisModal();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && analisisModal.classList.contains('active')) {
+                closeAnalisisModal();
+            }
+        });
+    <!-- Static Modals for Analisis Section -->
+    <div id="modal-analisis-1" class="analisis-modal-overlay">
+        <div class="analisis-modal">
+            <div class="analisis-modal-header">
+                <div class="analisis-modal-title-area">
+                    <span class="analisis-modal-tag" style="color: #00E5FF;">ANALISIS 01</span>
+                    <h2 class="analisis-modal-title">Kendala Penyusunan Produk</h2>
+                </div>
+                <button class="analisis-modal-close" onclick="closeStaticModal('modal-analisis-1')">✕</button>
+            </div>
+            <div class="analisis-modal-body">
+                <div class="analisis-sec">
+                    <p class="analisis-text">Dalam penyusunan perangkat pembelajaran pada ketiga siklus, terdapat beberapa kendala yang muncul, terutama terkait kompleksitas materi praktik dan penyesuaian dengan karakteristik peserta didik SMK. Materi seperti penggunaan <em>dividing head</em>, perhitungan parameter pemotongan, dan pembubutan ekasentrik memerlukan pemahaman konsep matematika teknik, ketelitian kerja, serta keterampilan praktik yang cukup tinggi. Oleh karena itu, guru perlu menyusun bahan ajar dan langkah kerja secara sistematis agar mudah dipahami peserta didik.</p>
+                    <p class="analisis-text">Kendala lain adalah perbedaan kemampuan awal peserta didik. Sebagian peserta didik memiliki kemampuan praktik yang baik, sedangkan sebagian lainnya masih memerlukan pendampingan intensif. Hal ini menyebabkan penyusunan perangkat pembelajaran harus mempertimbangkan pembelajaran berdiferensiasi agar semua peserta didik dapat mengikuti proses pembelajaran dengan optimal.</p>
+                    <p class="analisis-text">Selain itu, keterbatasan sarana dan prasarana praktik seperti jumlah mesin bubut, mesin frais, alat ukur, dan alat bantu praktik menjadi tantangan dalam merancang aktivitas pembelajaran. Guru harus menyesuaikan alokasi waktu, pembagian kelompok, serta strategi praktik agar pembelajaran tetap efektif meskipun fasilitas terbatas. Penyusunan instrumen asesmen juga menjadi tantangan karena pembelajaran praktik membutuhkan penilaian yang mencakup aspek pengetahuan, keterampilan, sikap kerja, dan keselamatan kerja (K3).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-analisis-2" class="analisis-modal-overlay">
+        <div class="analisis-modal">
+            <div class="analisis-modal-header">
+                <div class="analisis-modal-title-area">
+                    <span class="analisis-modal-tag" style="color: #BB86FC;">ANALISIS 02</span>
+                    <h2 class="analisis-modal-title">Konsep Pedagogis yang Diadopsi</h2>
+                </div>
+                <button class="analisis-modal-close" onclick="closeStaticModal('modal-analisis-2')">✕</button>
+            </div>
+            <div class="analisis-modal-body">
+                <div class="analisis-sec">
+                    <p class="analisis-text">Ketiga produk pembelajaran mengadopsi berbagai teori dan konsep pedagogi yang relevan dengan pembelajaran vokasional. Teori utama yang digunakan adalah konstruktivisme, di mana peserta didik membangun pemahaman melalui pengalaman langsung selama praktik. Peserta didik tidak hanya menerima informasi dari guru, tetapi juga aktif mencoba, menganalisis kesalahan, dan menemukan solusi selama proses praktik berlangsung.</p>
+                    <p class="analisis-text">Model <em>Project Based Learning</em> (PjBL) dan pembelajaran berbasis praktik diterapkan untuk menciptakan pembelajaran yang autentik dan kontekstual. Melalui proyek pembuatan benda kerja dan praktik pemesinan, peserta didik belajar menyelesaikan masalah nyata seperti yang ditemui di dunia industri. Pendekatan ini juga mendukung pengembangan keterampilan abad ke-21 seperti berpikir kritis, kreativitas, komunikasi, dan kolaborasi.</p>
+                    <p class="analisis-text">Konsep <em>scaffolding</em> dari Vygotsky diterapkan melalui pemberian bimbingan bertahap kepada peserta didik yang mengalami kesulitan selama praktik. Selain itu, pembelajaran berdiferensiasi juga diadopsi dengan menyesuaikan strategi pembelajaran berdasarkan kemampuan awal peserta didik. Pendekatan saintifik diterapkan melalui kegiatan mengamati, menanya, mencoba, menalar, dan mengomunikasikan hasil praktik.</p>
+                    <p class="analisis-text">Pada aspek evaluasi, perangkat pembelajaran menggunakan asesmen autentik yang mencakup <em>assessment as learning</em>, <em>assessment for learning</em>, dan <em>assessment of learning</em>. Penilaian dilakukan melalui observasi praktik, penilaian proyek, refleksi diri, penilaian teman sebaya, dan tes tertulis sehingga mampu menggambarkan kompetensi peserta didik secara menyeluruh.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-analisis-3" class="analisis-modal-overlay">
+        <div class="analisis-modal">
+            <div class="analisis-modal-header">
+                <div class="analisis-modal-title-area">
+                    <span class="analisis-modal-tag" style="color: #03DAC5;">ANALISIS 03</span>
+                    <h2 class="analisis-modal-title">Faktor Keberhasilan Penerapan</h2>
+                </div>
+                <button class="analisis-modal-close" onclick="closeStaticModal('modal-analisis-3')">✕</button>
+            </div>
+            <div class="analisis-modal-body">
+                <div class="analisis-sec">
+                    <p class="analisis-text">Keberhasilan penerapan perangkat pembelajaran dipengaruhi oleh beberapa faktor utama. Pertama, penggunaan pembelajaran berbasis praktik dan proyek membuat peserta didik lebih aktif dan termotivasi karena materi yang dipelajari berkaitan langsung dengan dunia kerja industri. Peserta didik tidak hanya belajar teori, tetapi juga menghasilkan produk nyata dan melakukan proses kerja seperti di bengkel industri.</p>
+                    <p class="analisis-text">Kedua, penggunaan media pembelajaran seperti demonstrasi langsung, video pembelajaran, gambar teknik, lembar kerja praktik, dan alat praktik nyata membantu peserta didik memahami konsep yang abstrak menjadi lebih konkret. Pendampingan guru secara intensif selama praktik juga sangat berpengaruh terhadap keberhasilan pembelajaran karena peserta didik mendapatkan umpan balik langsung ketika mengalami kesalahan.</p>
+                    <p class="analisis-text">Ketiga, penerapan budaya kerja industri dan K3 menjadi faktor penting dalam menciptakan lingkungan belajar yang disiplin, aman, dan profesional. Pembelajaran yang melibatkan kerja kelompok juga meningkatkan kemampuan komunikasi dan kolaborasi peserta didik.</p>
+                    <p class="analisis-text">Selain itu, keberhasilan pembelajaran didukung oleh adanya refleksi pembelajaran dan asesmen autentik yang membantu peserta didik memahami kekurangan serta melakukan perbaikan secara berkelanjutan. Program remedial dan pengayaan juga mendukung tercapainya kompetensi peserta didik sesuai kemampuan masing-masing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-analisis-4" class="analisis-modal-overlay">
+        <div class="analisis-modal">
+            <div class="analisis-modal-header">
+                <div class="analisis-modal-title-area">
+                    <span class="analisis-modal-tag" style="color: #FFAB00;">ANALISIS 04</span>
+                    <h2 class="analisis-modal-title">Penyesuaian untuk Kelas Berbeda</h2>
+                </div>
+                <button class="analisis-modal-close" onclick="closeStaticModal('modal-analisis-4')">✕</button>
+            </div>
+            <div class="analisis-modal-body">
+                <div class="analisis-sec">
+                    <p class="analisis-text">Perangkat pembelajaran pada ketiga siklus bersifat fleksibel dan dapat disesuaikan dengan kondisi kelas yang berbeda. Pada kelas dengan kemampuan dasar rendah, guru dapat menyederhanakan materi praktik, memperbanyak demonstrasi, serta memberikan langkah kerja yang lebih rinci dan bertahap. Guru juga dapat menggunakan metode pembelajaran kelompok kecil agar peserta didik memperoleh pendampingan lebih intensif.</p>
+                    <p class="analisis-text">Pada kelas dengan kemampuan lebih tinggi, pembelajaran dapat dikembangkan menjadi proyek yang lebih kompleks dan menantang, misalnya pembuatan komponen mesin dengan tingkat presisi lebih tinggi atau analisis optimasi parameter pemotongan. Peserta didik juga dapat diberikan tugas berbasis problem solving untuk meningkatkan kemampuan HOTS.</p>
+                    <p class="analisis-text">Jika fasilitas praktik terbatas, guru dapat memodifikasi pembelajaran dengan sistem rotasi kelompok, penggunaan simulasi digital, video praktik, atau demonstrasi terpusat sebelum praktik mandiri dilakukan. Selain itu, instrumen asesmen juga dapat disesuaikan dengan kondisi sekolah dan karakteristik peserta didik, baik dari segi tingkat kesulitan maupun bentuk penilaiannya.</p>
+                    <p class="analisis-text">Secara umum, perangkat pembelajaran pada ketiga siklus telah menunjukkan karakteristik pembelajaran vokasional yang efektif karena mengintegrasikan teori, praktik, asesmen autentik, pembelajaran aktif, dan budaya kerja industri. Fleksibilitas perangkat pembelajaran memungkinkan guru melakukan penyesuaian sesuai kebutuhan peserta didik, kondisi kelas, serta sarana dan prasarana yang tersedia sehingga pembelajaran tetap bermakna dan berorientasi pada pencapaian kompetensi kerja peserta didik SMK.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openStaticModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeStaticModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        // Also add logic to close on backdrop click for these static modals
+        document.querySelectorAll('.analisis-modal-overlay').forEach(modal => {
+            if(modal.id.startsWith('modal-analisis-')) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeStaticModal(modal.id);
+                    }
+                });
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.analisis-modal-overlay').forEach(modal => {
+                    if(modal.id.startsWith('modal-analisis-') && modal.classList.contains('active')) {
+                        closeStaticModal(modal.id);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
