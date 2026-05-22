@@ -2105,21 +2105,37 @@
             font-weight: 500;
         }
 
-        .galeri-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .galeri-carousel {
+            display: flex;
             gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding-bottom: 2rem;
             max-width: 1400px;
             width: 100%;
         }
 
-        /* First item spans 2 columns for editorial layout */
-        .galeri-item:first-child {
-            grid-column: span 2;
-            aspect-ratio: 16/9;
+        /* Custom scrollbar for carousel */
+        .galeri-carousel::-webkit-scrollbar {
+            height: 10px;
+        }
+        .galeri-carousel::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 5px;
+        }
+        .galeri-carousel::-webkit-scrollbar-thumb {
+            background: rgba(245, 197, 66, 0.5);
+            border-radius: 5px;
+        }
+        .galeri-carousel::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 197, 66, 0.8);
         }
 
         .galeri-item {
+            flex: 0 0 85%;
+            max-width: 800px;
+            scroll-snap-align: center;
             position: relative;
             border-radius: 14px;
             overflow: hidden;
@@ -2413,10 +2429,23 @@
             pointer-events: none;
         }
 
+        /* Galeri Carousel Styles */
+        .galeri-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            scrollbar-width: none;
+            scroll-snap-type: x mandatory;
+        }
+        .galeri-carousel::-webkit-scrollbar { display: none; }
+        .galeri-item {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+        }
+
         @media (max-width: 1024px) {
             .kompetensi-grid { grid-template-columns: repeat(2, 1fr); }
-            .galeri-grid { grid-template-columns: repeat(2, 1fr); }
-            .galeri-item:first-child { grid-column: span 2; }
         }
 
         @media (max-width: 768px) {
@@ -2434,8 +2463,6 @@
             .misi-item { flex-direction: column; text-align: center; align-items: center; }
             .galeri-section { padding: 6rem 1.5rem; }
             .video-section { padding: 2rem 1.5rem 6rem 1.5rem; }
-            .galeri-grid { grid-template-columns: 1fr; }
-            .galeri-item:first-child { grid-column: span 1; aspect-ratio: 4/3; }
             .lightbox-nav { width: 40px; height: 40px; font-size: 1.5rem; }
             .lightbox-prev { left: 0.5rem; }
             .lightbox-next { right: 0.5rem; }
@@ -2581,84 +2608,16 @@
                     <h2 class="about-quote">"Teknik mengajarkan saya presisi; pendidikan mengajarkan saya empati <span>keduanya saya bawa ke setiap kelas yang saya masuki.</span>"</h2>
                 </div>
                 <div class="about-right fade-up delay-1">
-                    <!-- Paragraph Slider -->
-                    <div class="para-slider-wrap" id="paraSliderWrap">
-                        <div class="para-slides" id="paraSlides">
-
-                            <!-- Slide 1 -->
-                            <div class="para-slide">
-                                <div>
-                                    <div class="slide-label">01 / Profil</div>
-                                    <p class="about-desc">Saya adalah Eka Sri Darma, mahasiswa Program Pendidikan
-                                        Profesi Guru (PPG) di Universitas Sarjanawiyata Tamansiswa (UST) Yogyakarta.
-                                        Dengan semangat dan komitmen penuh, saya mempersiapkan diri menjadi pendidik
-                                        profesional yang mampu memberikan pengalaman belajar bermakna bagi setiap
-                                        peserta didik.</p>
-                                </div>
-                            </div>
-
-                            <!-- Slide 2 -->
-                            <div class="para-slide">
-                                <div>
-                                    <div class="slide-label">02 / Kompetensi</div>
-                                    <p class="about-desc">Melalui program PPG, saya mengembangkan kompetensi pedagogik,
-                                        profesional, kepribadian, dan sosial sebagai fondasi menjadi guru yang
-                                        berintegritas dan berdampak. Saya percaya bahwa pendidikan adalah investasi
-                                        terbaik bagi masa depan bangsa.</p>
-                                </div>
-                            </div>
-
-                            <!-- Slide 3 -->
-                            <div class="para-slide">
-                                <div>
-                                    <div class="slide-label">03 / Nilai</div>
-                                    <p class="about-desc">Tumbuh dari nilai-nilai Tamansiswa yang menjunjung tinggi
-                                        kebebasan, kebudayaan, dan kemanusiaan, saya berkomitmen untuk menjadi guru yang
-                                        tidak hanya mentransfer ilmu, namun juga menginspirasi dan memberdayakan setiap
-                                        siswa.</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Dot Navigation -->
-                    <div class="para-dots" id="paraDots" aria-label="Navigasi paragraf">
-                        <button class="para-dot active" data-index="0" aria-label="Slide 1"></button>
-                        <button class="para-dot" data-index="1" aria-label="Slide 2"></button>
-                        <button class="para-dot" data-index="2" aria-label="Slide 3"></button>
-                    </div>
+                    <!-- placeholder to keep grid balanced -->
                 </div>
             </div>
-        </section>
 
-        <!-- Region Section -->
-        <section id="asal-daerah" class="region-section">
-            <h2 class="region-title fade-up">Asal & Keunikan Daerah</h2>
-            <div class="region-card fade-up delay-1">
-                <div class="region-content">
-                    <div class="region-text">
-                        <p>Perkenalkan, saya Eka Sri Darma. Saya lahir dan tumbuh di Manisrenggo, Kabupaten Klaten,
-                            sebuah daerah istimewa di lereng Gunung Merapi yang diberkahi tanah yang subur serta warisan
-                            sejarah yang agung. Daerah asal saya adalah rumah bagi Candi Plaosan yang megah—sebuah
-                            simbol harmoni, toleransi, dan mahakarya peradaban masa lalu. Nilai-nilai gotong royong,
-                            ketangguhan masyarakat lereng gunung, serta filosofi edukasi yang terpahat pada relief candi
-                            di daerah saya telah membentuk karakter saya menjadi pribadi yang adaptif dan menghargai
-                            keberagaman. Dari tanah penuh sejarah inilah, tumbuh inspirasi besar dalam diri saya untuk
-                            menjadi seorang pendidik.</p>
-                        <p>Melihat bagaimana relief-relief Candi Sojiwan di Manisrenggo mampu menyampaikan pesan moral
-                            dan edukasi melintasi abad, saya menyadari bahwa sejatinya mengajar adalah seni abadi untuk
-                            menanamkan nilai kebaikan. Panggilan jiwa ini semakin menguat ketika saya melihat dinamika
-                            anak-anak di daerah saya; mereka membutuhkan pemandu yang tidak hanya mentransfer ilmu,
-                            tetapi juga menumbuhkan karakter yang tangguh, adaptif, dan berbudaya di tengah perkembangan
-                            zaman.</p>
-                        <p>Melalui program Pendidikan Profesi Guru (PPG) ini, tujuan utama saya adalah
-                            mentransformasikan diri menjadi guru yang profesional, inovatif, dan berpihak pada murid.
-                            Saya berkomitmen untuk merancang pembelajaran yang bermakna, mengintegrasikan teknologi
-                            tanpa kehilangan akar kearifan lokal, serta menciptakan ruang kelas yang aman dan inklusif
-                            bagi setiap keunikan peserta didik. Bagi saya, menjadi guru bukan sekadar profesi, melainkan
-                            sebuah pengabdian untuk mengukir masa depan bangsa.</p>
-                    </div>
+            <!-- Subtitle + Card, full width below the quote -->
+            <div class="fade-up delay-2" style="margin-top: 3rem;">
+                <h3 id="asal-daerah" style="font-family: var(--font-primary); font-size: 1.4rem; color: var(--accent-color); margin-bottom: 1.2rem;">Asal &amp; Keunikan Daerah</h3>
+                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,197,66,0.18); border-radius: 16px; padding: 1.8rem 2.2rem; backdrop-filter: blur(8px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <p style="font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8; font-weight: 300; text-align: justify; margin: 0; opacity: 0.9;">Perkenalkan, saya Eka Sri Darma, mahasiswa Program Pendidikan Profesi Guru (PPG) di Universitas Sarjanawiyata Tamansiswa (UST) Yogyakarta. Saya lahir dan tumbuh di Manisrenggo, Kabupaten Klaten, sebuah daerah istimewa di lereng Gunung Merapi yang diberkahi tanah yang subur serta warisan sejarah yang agung. Daerah asal saya adalah rumah bagi candi-candi yang megah, sebuah simbol harmoni, toleransi, dan mahakarya peradaban masa lalu. Dari tanah penuh sejarah inilah, tumbuh inspirasi besar dalam diri saya untuk menjadi seorang pendidik yang adaptif dan menghargai keberagaman.</p>
+                    <p style="font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8; font-weight: 300; text-align: justify; margin: 0; opacity: 0.9;">Melalui program PPG, saya mengembangkan kompetensi pedagogik, profesional, kepribadian, dan sosial sebagai fondasi menjadi guru yang berintegritas dan berdampak. Saya percaya bahwa pendidikan adalah investasi terbaik bagi masa depan bangsa. Tumbuh dari nilai-nilai Tamansiswa yang menjunjung tinggi kebebasan, kebudayaan, dan kemanusiaan, saya berkomitmen untuk menjadi guru yang tidak hanya mentransfer ilmu, namun juga menginspirasi dan memberdayakan setiap siswa. Saya berkomitmen untuk merancang pembelajaran yang bermakna, mengintegrasikan teknologi tanpa kehilangan akar kearifan lokal, serta menciptakan ruang kelas yang aman dan inklusif bagi setiap keunikan peserta didik.</p>
                 </div>
             </div>
         </section>
@@ -3348,47 +3307,113 @@
             <h2 class="section-header fade-up" style="text-align: center;">Galeri</h2>
             <p class="galeri-subtitle fade-up delay-1">Dokumentasi Kegiatan Praktik Mengajar PPG</p>
 
-            <div class="galeri-grid fade-up delay-2">
+            <div class="galeri-carousel fade-up delay-2">
 
-                <div class="galeri-item"
-                     data-caption-title="Praktik Mengajar Siklus 1"
-                     data-caption="Dokumentasi kegiatan pembelajaran — Penggunaan Dividing Head">
-                    <img src="IMG_20260427_080932_480.jpg" alt="Dokumentasi Praktik Mengajar Siklus 1">
+                <!-- 1 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 1" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260427_080932_480.jpg" alt="Dokumentasi Praktik 1">
                     <div class="galeri-overlay">
-                        <div class="galeri-caption-title">Praktik Mengajar Siklus 1</div>
+                        <div class="galeri-caption-title">Dokumentasi Praktik 1</div>
                         <div class="galeri-caption">Klik untuk memperbesar ↗</div>
                     </div>
                     <div class="galeri-zoom-badge">🔍</div>
                 </div>
 
-                <div class="galeri-item"
-                     data-caption-title="Praktik Mengajar Siklus 2"
-                     data-caption="Dokumentasi kegiatan pembelajaran — Parameter Pemotongan">
-                    <img src="IMG_20260504_094055_377.jpg" alt="Dokumentasi Praktik Mengajar Siklus 2">
+                <!-- 2 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 2" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260305_071225_788.jpg.jpeg" alt="Dokumentasi Praktik 2">
                     <div class="galeri-overlay">
-                        <div class="galeri-caption-title">Praktik Mengajar Siklus 2</div>
+                        <div class="galeri-caption-title">Dokumentasi Praktik 2</div>
                         <div class="galeri-caption">Klik untuk memperbesar ↗</div>
                     </div>
                     <div class="galeri-zoom-badge">🔍</div>
                 </div>
 
-                <div class="galeri-item"
-                     data-caption-title="Suasana Kelas Praktikum"
-                     data-caption="Interaksi aktif guru dan murid di bengkel pemesinan">
-                    <img src="IMG_20260507_091752_468.jpg" alt="Suasana Kelas Praktikum">
+                <!-- 3 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 3" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260504_094055_377.jpg" alt="Dokumentasi Praktik 3">
                     <div class="galeri-overlay">
-                        <div class="galeri-caption-title">Suasana Kelas Praktikum</div>
+                        <div class="galeri-caption-title">Dokumentasi Praktik 3</div>
                         <div class="galeri-caption">Klik untuk memperbesar ↗</div>
                     </div>
                     <div class="galeri-zoom-badge">🔍</div>
                 </div>
 
-                <div class="galeri-item"
-                     data-caption-title="Interaksi Guru &amp; Murid"
-                     data-caption="Sesi tanya jawab dan bimbingan langsung di ruang praktik">
-                    <img src="IMG_20260507_091912_416.jpg" alt="Interaksi Guru dan Murid">
+                <!-- 4 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 4" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260507_091912_416.jpg" alt="Dokumentasi Praktik 4">
                     <div class="galeri-overlay">
-                        <div class="galeri-caption-title">Interaksi Guru &amp; Murid</div>
+                        <div class="galeri-caption-title">Dokumentasi Praktik 4</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <!-- 5 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 5" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260421_072308_558.jpg.jpeg" alt="Dokumentasi Praktik 5">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Dokumentasi Praktik 5</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <!-- 6 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 6" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260421_072335_233.jpg.jpeg" alt="Dokumentasi Praktik 6">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Dokumentasi Praktik 6</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <!-- 7 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 7" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260421_072516_425.jpg.jpeg" alt="Dokumentasi Praktik 7">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Dokumentasi Praktik 7</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <!-- 8 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 8" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260504_094021_416.jpg.jpeg" alt="Dokumentasi Praktik 8">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Dokumentasi Praktik 8</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <!-- 9 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 9" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260504_094030_861.jpg.jpeg" alt="Dokumentasi Praktik 9">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Dokumentasi Praktik 9</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <!-- 10 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 10" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260518_072433_456.jpg.jpeg" alt="Dokumentasi Praktik 10">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Dokumentasi Praktik 10</div>
+                        <div class="galeri-caption">Klik untuk memperbesar ↗</div>
+                    </div>
+                    <div class="galeri-zoom-badge">🔍</div>
+                </div>
+
+                <!-- 11 -->
+                <div class="galeri-item" data-caption-title="Dokumentasi Praktik 11" data-caption="Kegiatan belajar mengajar PPG">
+                    <img src="Foto Dokumentasi/IMG_20260522_094658_920.jpg.jpeg" alt="Dokumentasi Praktik 11">
+                    <div class="galeri-overlay">
+                        <div class="galeri-caption-title">Dokumentasi Praktik 11</div>
                         <div class="galeri-caption">Klik untuk memperbesar ↗</div>
                     </div>
                     <div class="galeri-zoom-badge">🔍</div>
