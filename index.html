@@ -2759,22 +2759,114 @@
         </section>
 
         <!-- About Section -->
+        <style>
+            .about-container { grid-template-columns: 1fr 2fr; align-items: start; gap: 4rem; }
+            .about-right { display: block; }
+            
+            /* Sticky Note Style */
+            .sticky-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 320px;
+                margin: 1rem auto;
+                perspective: 1000px;
+            }
+            .sticky-note {
+                position: relative;
+                background: linear-gradient(135deg, #fff9b0 0%, #f9e25d 100%);
+                padding: 3rem 2.5rem 3rem;
+                color: #1a1a1a;
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.9rem;
+                line-height: 1.5;
+                text-align: center;
+                border-radius: 2px 2px 40px 2px / 2px 2px 8px 2px;
+                box-shadow: 
+                    -2px 5px 10px rgba(0,0,0,0.15), 
+                    inset 0 -15px 15px rgba(0,0,0,0.05);
+                transform: rotate(-3deg);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .sticky-note:hover {
+                transform: rotate(0deg) scale(1.02);
+                box-shadow: 
+                    0 8px 15px rgba(0,0,0,0.2), 
+                    inset 0 -15px 15px rgba(0,0,0,0.02);
+            }
+            /* Curl shadow */
+            .sticky-note::before {
+                content: "";
+                position: absolute;
+                bottom: -5px;
+                right: 15px;
+                width: 70%;
+                height: 20px;
+                background: transparent;
+                box-shadow: 0 15px 12px rgba(0,0,0,0.4);
+                transform: rotate(4deg);
+                z-index: -1;
+                border-radius: 50%;
+            }
+            
+            /* 3D Pin */
+            .sticky-pin {
+                position: absolute;
+                top: -12px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 24px;
+                height: 24px;
+                background: radial-gradient(circle at 35% 35%, #ff5e5e 0%, #d40000 60%, #8a0000 100%);
+                border-radius: 50%;
+                box-shadow: 2px 4px 5px rgba(0,0,0,0.4), inset -2px -2px 4px rgba(0,0,0,0.3);
+                z-index: 5;
+            }
+            .sticky-pin::before {
+                content: '';
+                position: absolute;
+                top: 4px;
+                left: 5px;
+                width: 7px;
+                height: 7px;
+                background: rgba(255,255,255,0.8);
+                border-radius: 50%;
+            }
+            .sticky-pin::after {
+                content: '';
+                position: absolute;
+                top: 18px;
+                left: 9px;
+                width: 2px;
+                height: 20px;
+                background: linear-gradient(to right, #999, #ccc, #666);
+                transform: rotate(-15deg);
+                z-index: -1;
+                box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+                border-radius: 0 0 2px 2px;
+            }
+
+            @media (max-width: 1024px) {
+                .about-container { grid-template-columns: 1fr; gap: 3rem; }
+                .sticky-note { font-size: 1.7rem; padding: 2.5rem 2rem 2.5rem; }
+            }
+        </style>
         <section id="about" class="about">
             <div class="about-container">
                 <div class="about-left fade-up">
-                    <h2 class="about-quote">"Teknik mengajarkan saya presisi; pendidikan mengajarkan saya empati <span>keduanya saya bawa ke setiap kelas yang saya masuki.</span>"</h2>
+                    <div class="sticky-wrapper">
+                        <div class="sticky-note">
+                            <div class="sticky-pin"></div>
+                            "Teknik mengajarkan saya presisi; pendidikan mengajarkan saya empati,
+                            <span style="display: block; margin-top: 1rem;">keduanya saya bawa ke setiap kelas yang saya masuki."</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="about-right fade-up delay-1">
-                    <!-- placeholder to keep grid balanced -->
-                </div>
-            </div>
-
-            <!-- Subtitle + Card, full width below the quote -->
-            <div class="fade-up delay-2" style="margin-top: 3rem;">
-                <h3 id="asal-daerah" style="font-family: var(--font-primary); font-size: 1.4rem; color: var(--accent-color); margin-bottom: 1.2rem;">Asal &amp; Keunikan Daerah</h3>
-                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,197,66,0.18); border-radius: 16px; padding: 1.8rem 2.2rem; backdrop-filter: blur(8px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                    <p style="font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8; font-weight: 300; text-align: justify; margin: 0; opacity: 0.9;">Perkenalkan, saya Eka Sri Darma, mahasiswa Program Pendidikan Profesi Guru (PPG) di Universitas Sarjanawiyata Tamansiswa (UST) Yogyakarta. Saya lahir dan tumbuh di Manisrenggo, Kabupaten Klaten, sebuah daerah istimewa di lereng Gunung Merapi yang diberkahi tanah yang subur serta warisan sejarah yang agung. Daerah asal saya adalah rumah bagi candi-candi yang megah, sebuah simbol harmoni, toleransi, dan mahakarya peradaban masa lalu. Dari tanah penuh sejarah inilah, tumbuh inspirasi besar dalam diri saya untuk menjadi seorang pendidik yang adaptif dan menghargai keberagaman.</p>
-                    <p style="font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8; font-weight: 300; text-align: justify; margin: 0; opacity: 0.9;">Melalui program PPG, saya mengembangkan kompetensi pedagogik, profesional, kepribadian, dan sosial sebagai fondasi menjadi guru yang berintegritas dan berdampak. Saya percaya bahwa pendidikan adalah investasi terbaik bagi masa depan bangsa. Tumbuh dari nilai-nilai Tamansiswa yang menjunjung tinggi kebebasan, kebudayaan, dan kemanusiaan, saya berkomitmen untuk menjadi guru yang tidak hanya mentransfer ilmu, namun juga menginspirasi dan memberdayakan setiap siswa. Saya berkomitmen untuk merancang pembelajaran yang bermakna, mengintegrasikan teknologi tanpa kehilangan akar kearifan lokal, serta menciptakan ruang kelas yang aman dan inklusif bagi setiap keunikan peserta didik.</p>
+                    <h3 id="asal-daerah" style="font-family: var(--font-primary); font-size: 1.4rem; color: var(--accent-color); margin-bottom: 1.2rem; text-align: center;">Asal &amp; Keunikan Daerah</h3>
+                    <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(245,197,66,0.18); border-radius: 16px; padding: 1.8rem 2.2rem; backdrop-filter: blur(8px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); display: flex; flex-direction: column; gap: 1.5rem;">
+                        <p style="font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8; font-weight: 300; text-align: justify; margin: 0; opacity: 0.9;">Perkenalkan, saya Eka Sri Darma, mahasiswa Program Pendidikan Profesi Guru (PPG) di Universitas Sarjanawiyata Tamansiswa (UST) Yogyakarta. Saya lahir dan tumbuh di Manisrenggo, Kabupaten Klaten, sebuah daerah istimewa di lereng Gunung Merapi yang diberkahi tanah yang subur serta warisan sejarah yang agung. Daerah asal saya adalah rumah bagi candi-candi yang megah, sebuah simbol harmoni, toleransi, dan mahakarya peradaban masa lalu. Dari tanah penuh sejarah inilah, tumbuh inspirasi besar dalam diri saya untuk menjadi seorang pendidik yang adaptif dan menghargai keberagaman.</p>
+                        <p style="font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.8; font-weight: 300; text-align: justify; margin: 0; opacity: 0.9;">Melalui program PPG, saya mengembangkan kompetensi pedagogik, profesional, kepribadian, dan sosial sebagai fondasi menjadi guru yang berintegritas dan berdampak. Saya percaya bahwa pendidikan adalah investasi terbaik bagi masa depan bangsa. Tumbuh dari nilai-nilai Tamansiswa yang menjunjung tinggi kebebasan, kebudayaan, dan kemanusiaan, saya berkomitmen untuk menjadi guru yang tidak hanya mentransfer ilmu, namun juga menginspirasi dan memberdayakan setiap siswa. Saya berkomitmen untuk merancang pembelajaran yang bermakna, mengintegrasikan teknologi tanpa kehilangan akar kearifan lokal, serta menciptakan ruang kelas yang aman dan inklusif bagi setiap keunikan peserta didik.</p>
+                    </div>
                 </div>
             </div>
         </section>
