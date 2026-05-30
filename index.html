@@ -61,7 +61,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('pngtree-vector-batik-parang-pattern-white-chocolate-png-image_12657633.png');
+            background-image: url('assets/pngtree-vector-batik-parang-pattern-white-chocolate-png-image_12657633.png');
             background-repeat: repeat;
             background-size: 300px;
             opacity: 0.05;
@@ -411,7 +411,7 @@
 
         .marquee-wrapper {
             position: absolute;
-            bottom: 1.5rem;
+            bottom: -3rem;
             left: 0;
             width: 100%;
             overflow: hidden;
@@ -614,7 +614,7 @@
             width: 100%;
             max-width: 1400px;
             background-color: #102A4A;
-            background-image: url('Peta Indonesia.png');
+            background-image: url('assets/Peta Indonesia.png');
             background-size: cover;
             background-position: center;
             background-blend-mode: overlay;
@@ -629,7 +629,7 @@
         }
 
         #inspirasi .region-card {
-            background-image: url('pngtree-black-and-white-mega-mendung-batik-seamless-cloud-pattern-vector-png-image_17662309.webp');
+            background-image: url('assets/pngtree-black-and-white-mega-mendung-batik-seamless-cloud-pattern-vector-png-image_17662309.webp');
         }
 
         #inspirasi .region-text {
@@ -2636,9 +2636,9 @@
     <!-- Navigation -->
     <nav class="navbar">
         <a href="#hero" class="nav-brand">
-            <img src="Our_Work2.png" alt="Our Work"
+            <img src="assets/Our_Work2.png" alt="Our Work"
                 style="height: 54px; width: auto; object-fit: contain; mix-blend-mode: screen;">
-            <img src="unnamed.png" alt="Logo Universitas Sarjanawiyata Tamansiswa" class="brand-logo">
+            <img src="assets/unnamed.png" alt="Logo Universitas Sarjanawiyata Tamansiswa" class="brand-logo">
         </a>
         <div class="nav-links mono-text">
             <a href="#hero">Beranda</a>
@@ -4242,7 +4242,7 @@
         // Initial run
         updateArtefakFilters();
 
-        // 9. Nav Filter Links — apply category/siklus filter when a nav link with data-filter-* is clicked
+        // 9. Nav Filter Links – apply category/siklus filter when a nav link with data-filter-* is clicked
         document.querySelectorAll('.nav-filter-link').forEach(link => {
             link.addEventListener('click', () => {
                 const targetCategory = link.getAttribute('data-filter-category');
@@ -4268,7 +4268,7 @@
             });
         });
 
-        // 10. Galeri Dokumentasi — Lightbox
+        // 10. Galeri Dokumentasi – Lightbox
         const galeriItems    = document.querySelectorAll('.galeri-item');
         const lightboxEl     = document.getElementById('lightbox');
         const lightboxImg    = document.getElementById('lightbox-img');
@@ -4450,7 +4450,7 @@
                 </div>
 
                 <div class="analisis-sec">
-                    <h3 class="analisis-sec-title"><span>✨</span> 7. Kesimpulan</h3>
+                    <h3 class="analisis-sec-title"><span>📝</span> 7. Kesimpulan</h3>
                     <p class="analisis-text">RPP Pembelajaran Mendalam pada materi Parameter Pemotongan Mesin Bubut dan Frais dirancang untuk menciptakan pembelajaran vokasional yang kontekstual, aktif, dan bermakna. Pembelajaran tidak hanya menekankan aspek teori, tetapi juga penguasaan keterampilan praktik, kemampuan berpikir kritis, kolaborasi, dan refleksi pengalaman belajar.</p>
                     <p class="analisis-text">Pendekatan Deep Learning yang dipadukan dengan Project Based Learning dinilai sesuai untuk pembelajaran di SMK karena mampu mendekatkan pengalaman belajar dengan kondisi nyata dunia kerja industri.</p>
                 </div>
@@ -4598,14 +4598,14 @@
                     <div class="analisis-sub-sec">
                         <h4 class="analisis-sub-title">Kelebihan Artefak</h4>
                         <div class="analisis-box kelebihan">
-                            ${kelebihanList.map(item => `• ${item}<br>`).join('')}
+                            ${kelebihanList.map(item => `  • ${item}<br>`).join("")}
                         </div>
                     </div>
 
                     <div class="analisis-sub-sec">
                         <h4 class="analisis-sub-title">Kekurangan & Tantangan</h4>
                         <div class="analisis-box kekurangan">
-                            ${kekuranganList.map(item => `• ${item}<br>`).join('')}
+                            ${kekuranganList.map(item => `  • ${item}<br>`).join("")}
                         </div>
                     </div>
                 </div>
@@ -4640,7 +4640,7 @@
                 </div>
 
                 <div class="analisis-sec">
-                    <h3 class="analisis-sec-title"><span>✨</span> Kesimpulan Refleksi</h3>
+                    <h3 class="analisis-sec-title"><span>📝</span> Kesimpulan Refleksi</h3>
                     <p class="analisis-text">Pengembangan artefak ini terbukti krusial dalam mendukung keberhasilan pembelajaran praktik pemesinan yang aman, presisi, dan terstruktur. Melalui analisis berkelanjutan dan umpan balik yang terukur, kualitas proses pembelajaran teknik pemesinan dapat terus ditingkatkan agar lulusan SMK memiliki bekal kompetensi yang matang dan berdaya saing tinggi di dunia kerja industri global.</p>
                 </div>
             `;
